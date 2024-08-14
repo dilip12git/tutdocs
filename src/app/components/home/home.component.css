@@ -1,0 +1,149 @@
+.container {
+  margin-top: 0px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.intro_container {
+  width: 300px;
+  background-image: linear-gradient(45deg, #04ad42, #3092FA);
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: white;
+  min-height: 20px;
+  animation: transform .3s;
+}
+
+.button_container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+
+}
+
+.guest_user {
+  background-image: linear-gradient(45deg, #04ad42, #3092FA);
+  background-clip: text;
+  color: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 100px;
+
+
+}
+
+.guest_user:hover,
+.signbtn:hover {
+  opacity: .9;
+
+}
+
+
+.main_title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px 15px;
+  margin-left: 80px;
+  max-width: 500px;
+  /* gap:15px; */
+  scroll-behavior: smooth;
+}
+
+.main_title {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+.subtitle {
+  font-size: 35px;
+  font-weight: 600;
+  color: dimgray;
+  margin-top: 0px;
+  margin-bottom: 15px;
+
+}
+
+.tut {
+  background-image: linear-gradient(45deg, #04ad42, #3092FA);
+  background-clip: text;
+  color: transparent;
+  font-size: 65px;
+  font-weight: 600;
+}
+
+.title_Desc {
+  max-width: 650px;
+  font-size: 18px;
+  color: dimgray;
+  font-weight: normal;
+  margin: 17px 0px;
+
+}
+
+
+
+.signbtn {
+  border-radius: 100px;
+  background-image: linear-gradient(45deg, #04ad42, #3092FA);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+  /* margin-top: 10px; */
+
+
+}
+
+
+
+@media screen and (max-width:768px) {
+  
+  .main_title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 50px 12px;
+    /* max-width: 600px; */
+    margin-left: 10px;
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+      transform: translateY(-100%);
+  }
+  to {
+      transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+      transform: translateY(100%);
+  }
+  to {
+      transform: translateY(0);
+  }
+}
+
+.main_title {
+  animation: slideInFromTop 1s ease-in-out;
+}
+
+.title_Desc, .button_container {
+  animation: slideInFromBottom 1s ease-in-out;
+}

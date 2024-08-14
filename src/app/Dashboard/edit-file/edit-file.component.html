@@ -1,0 +1,124 @@
+<div class="container">
+    
+    <div class="edit-file_container">
+    <div class="title_container">
+        <div class="icon_container">
+            <fa-icon [icon]="faFileEdit"></fa-icon>
+        </div>
+        <span>Edit your document details</span>
+    </div>
+    <form (ngSubmit)="submitForm()">
+        <div class="box-container">
+            <label>Document name</label>
+            <input type="text" [(ngModel)]="fileName" name="fileName" class="input-box" disabled="true">
+        </div>
+        <div class="box-container">
+            <label>Document size</label>
+            <input type="text" [(ngModel)]="fileSize" name="fileSize" class="input-box" disabled="true">
+        </div>
+        <div class="box-container">
+            <label>Upload on</label>
+            <input type="text" [(ngModel)]="uploadDate" name="uploadDate" class="input-box" disabled="true">
+        </div>
+        <div class="box-container">
+            <label>Document title</label>
+            <input type="text" [(ngModel)]="fileTitle" name="fileTitle" class="input-box">
+        </div>
+
+        <div class="box-container">
+                <div class="add-label">
+                    <span class="label_name">Course / course code</span>
+                    <div class="isSearcing_status">
+                        <mat-spinner diameter="15" color="custom-green" *ngIf="isSearching"></mat-spinner>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <input type="text"  class="input-box"
+                        placeholder="Search your course name Or course code" 
+                        [(ngModel)]="searchCourseQuery"
+                        (keyup)="performCourseSearch()" 
+                        autocomplete="off" 
+                        name="searchCourseQuery"
+                        required />
+                    <div class="search-results" *ngIf="searchCourseResults.length > 0">
+                        <div class="results_wrapper_container">
+                            <div class="results_wrapper" *ngFor="let result of searchCourseResults"
+                                (click)="selectCourseResult(result)">
+                                <fa-icon [icon]="faFolder"></fa-icon>
+                                <span class="search_course_name">{{ result.course_name }} -
+                                    {{result.course_code}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+        <div class="box-container">
+            <span class="label">Document type</span>
+            <div class="radioOption_container">
+                <label>
+                    <input type="radio"  value="Lecture Notes"  [(ngModel)]="docType" name="options">
+                    <span>Lecture Notes</span>
+                </label>
+                <label>
+                    <input type="radio"  value="Assignment" [(ngModel)]="docType" name="options">
+                    <span>Assignment</span>
+                </label>
+                <label>
+                    <input type="radio" value="Summary" [(ngModel)]="docType"  name="options">
+                    <span>Summary</span>
+                </label>
+                <label>
+                    <input type="radio"  value="Lab Manual" [(ngModel)]="docType"  name="options">
+                    <span>Lab Manual</span>
+                </label>
+                <label>
+                    <input type="radio"  value="Syllabus" [(ngModel)]="docType" name="options">
+                    <span>Syllabus</span>
+                </label>
+                <label>
+                    <input type="radio" value="Questions Bank" [(ngModel)]="docType"  name="options">
+                    <span>Questions Bank</span>
+                </label>
+                <label>
+                    <input type="radio"   value="Questions Paper" [(ngModel)]="docType"  name="options">
+                    <span>Questions Paper</span>
+                </label>
+                <label>
+                    <input type="radio"  value="Other" [(ngModel)]="docType"  name="options">
+                    <span>Other</span>
+                </label>
+             
+            </div>
+        </div>
+        <div class="box-container">
+            <label>Academic Year</label>
+            <select [(ngModel)]="academicYear" name="academicYear" class="input-box">
+                <option value="2020/2021">2020/2021</option>
+                <option value="2022/2023">2022/2023</option>
+                <option value="2023/2024">2023/2024</option>
+            </select>
+        </div>
+        <div class="box-container">
+            <label>Describe document</label>
+            <textarea rows="5"  class="input-box textarea" [(ngModel)]="docDescription" name="docDescription" >
+                </textarea>
+        </div>
+
+        <div class="box-container">
+            <span class="error" *ngIf="error">Fill all requireds fields</span>
+                <div class="updating_status" *ngIf="isUpdating">
+                    <mat-spinner diameter="20" color="custom-green" ></mat-spinner>
+                    <span>Updating...</span>
+                </div>
+        </div>
+        <div class="box-container">
+            <input type="submit" value="Submit Details" class="input-box-btn">
+        </div>
+
+    </form>
+
+
+</div>
+
+</div>

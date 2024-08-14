@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="search_university_container">
+        <div class="university_icon_container">
+            <fa-icon [icon]="faSchool" class="university-icon"></fa-icon>
+        </div>
+        <div class="title_container">
+            <span class="title">At which school do you study?</span>
+            <span class="title_desc">Search for a High School and find study material for it</span>
+        </div>
+        <div class="searchBar_container">
+            <div class="search_box_container">
+                <input type="text" class="search_box" placeholder="Type to start searching..." name="searchQuery"
+                    [(ngModel)]="searchQuery" (keyup)="performSearch()" autocomplete="off">
+                <div class="spinner"><mat-spinner diameter="15" color="custom-green" *ngIf="isSearching"></mat-spinner>
+                </div>
+                <fa-icon [icon]="faSearch" class="search-icon"></fa-icon>
+            </div>
+            <div class="search-results" *ngIf="searchResults.length > 0">
+                <div class="results_wrapper_container">
+                    <div class="results_wrapper" *ngFor="let result of searchResults" (click)="selectResult(result)">
+                        <fa-icon [icon]="faSchool"></fa-icon>
+                        <span class="search_institute_name" (click)="gotoInstitutions(result.institution_name)">{{ result.institution_name }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loading_container" *ngIf="isLoading; else load">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_container">
+           <div class="skeleton_card" *ngFor="let repeat of repeatArray">
+             <div class="skeleton_icon"></div>
+             <div class="skeleton_info_container">
+               <div class="skeleton_text l"></div>
+               <div class="skeleton_text s"></div>
+             </div>
+           </div>
+        </div>
+       </div>
+    <ng-template #load>
+    <div class="most_popular_university_container">
+        <span class="most_univi_title">Most popular high school</span>
+        <div class="university_wrapper" *ngIf="institutions.length>0; else loadError">
+            <div class="university_container" *ngFor="let institution of institutions">
+            <div class="univi_icon_container">
+                <fa-icon [icon]="faSchool"></fa-icon>
+            </div>
+            <div class="univi_info">
+                <span class="university_name" (click)="gotoInstitutions(institution.institution_name)">{{ institution.institution_name }}</span>
+                <span class="university_country">{{institution.country}}</span>
+            </div>
+            </div>
+        </div>
+        <ng-template #loadError>
+             <div class="notFound_error">No any high school found yet !</div>
+        </ng-template>
+        </div>
+        </ng-template>
+</div>

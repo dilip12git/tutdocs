@@ -1,0 +1,33 @@
+
+<div class="container">
+    <div *ngIf="uploadingData" class="loading-container">
+        <mat-spinner diameter="50" color="custom-green"></mat-spinner>
+      </div>
+    <div class="form-container">
+        <h3 class="title">Add school or university</h3>
+        <form (ngSubmit)="submitForm()">
+            <label for="selectedOption">I want to add a</label>
+            <div class="select-container">
+                <select [(ngModel)]="selectedOption" name="selectedOption" required>
+                    <option value="" class="select-placeholder" disabled>Select institution type</option>
+                    <option value="University">University</option>
+                    <option value="College">College</option>
+                    <option value="Institute">Institute</option>
+                    <option value="High School">High School</option>
+                </select>
+            </div>
+            <label for="country">Country</label>
+            <input type="text" [(ngModel)]="country" name="country" class="form-input country" placeholder="Country" autocomplete="off" required>
+            <label for="university">University / School name</label>
+            <input type="text" [(ngModel)]="institutionName" name="institutionName" class="form-input university" autocomplete="off"placeholder="University / School name" required>
+            <label for="websiteUrl">Website Url (Optional)</label>
+            <input type="text" [(ngModel)]="websiteUrl" name="websiteUrl" class="form-input website-url" placeholder="Website Url" autocomplete="off" >
+            <div class="btn_msg-container">
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+              </div>
+            <button type="submit" class="add-btn">Add</button>
+        </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,141 @@
+<app-simple-header></app-simple-header>
+<div class="container">
+    <div *ngIf="uploadingDataStatus" class="loading-container">
+        <div class="status_container">
+            <mat-spinner diameter="30" color="custom-green"></mat-spinner>
+            <span>Please wait, While uploading...</span>
+        </div>
+    </div>
+    <div *ngIf="generatingStatus" class="loading-container">
+        <div class="status_container">
+            <mat-spinner diameter="30" color="custom-green"></mat-spinner>
+            <span>Generating thumbnail...</span>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="tab-bar-container">
+            <div class="tabBar active-tabBar">
+                <div class="tab">
+                    <span class="count-text"><fa-icon [icon]="faCheck"></fa-icon></span>
+                    <span class="tab-text">Upload</span>
+                </div>
+            </div>
+            <div class="tabBar active-tabBar">
+                <div class="tab">
+                    <span class="count-text"><fa-icon [icon]="faCheck"></fa-icon></span>
+                    <span class="tab-text">Details</span>
+                </div>
+            </div>
+            <div class="tabBar">
+                <div class="tab">
+                    <span class="count-text"><fa-icon [icon]="faCheck"></fa-icon></span>
+                    <span class="tab-text">Done</span>
+                </div>
+            </div>
+        </div>
+
+        <form (ngSubmit)="submitForm()">
+            <span class="label_name">Institutions</span>
+            <input type="text" class="input-univi-field" name="searchQuery"
+                placeholder="Search your university / school name" [(ngModel)]="userInstitute_name" autocomplete="off"
+                disabled="true" />
+                <span class="label_name">Edit file title</span>
+                <input type="text" placeholder="Title" name="fileName" [(ngModel)]="fileName" required>
+            <div class="label_and_spinner">
+                <span class="label_name">Course / course code</span>
+                <div class="isSearcing_status">
+                    <mat-spinner diameter="15" color="custom-green" *ngIf="isSearching"></mat-spinner>
+                </div>
+                <div (click)="addCourse()" class="add-course addCOurse"><span>Can't find, Add</span></div>
+            </div>
+            <div class="search-container">
+                <input type="text" name="searchCourseQuery" placeholder="Search your course name Or course code"
+                    [(ngModel)]="searchCourseQuery" (keyup)="performCourseSearch()" autocomplete="off"
+                    name="searchCourseQuery" required />
+                <div class="search-results" *ngIf="searchCourseResults.length > 0">
+                    <div class="results_wrapper_container">
+                        <div class="results_wrapper" *ngFor="let result of searchCourseResults"
+                            (click)="selectCourseResult(result)">
+                            <fa-icon [icon]="faFolder"></fa-icon>
+                            <span class="search_course_name">{{ result.course_name }} -
+                                {{result.course_code}}</span>
+                        </div>
+                    </div>
+                    <div (click)="addCourse()" class="add-course"><span>Can't find, Add your
+                            Course</span></div>
+                </div>
+            </div>
+            <span class="label_name">Academic Year</span>
+
+            <select [(ngModel)]="selectedAcademicYear" name="selectedAcademicYear" required>
+                <option value="" class="select-placeholder" disabled>Select Academic Year</option>
+                <option value="2020/2021">2020/2021</option>
+                <option value="2022/2023">2022/2023</option>
+                <option value="2023/2024">2023/2024</option>
+            </select>
+
+            <span class="label_name">Select file type:</span>
+            <div class="radio_option_main_container">
+                <!-- <div class="radioOption_container"> -->
+                    <label class="radio_option">
+                        <input type="radio" name="options" value="Syllabus" (change)="onOptionChange($event)"
+                            class="radio_btn">
+                        <span class="option_name">Syllabus</span>
+                    </label>
+                    <label class="radio_option">
+                        <input type="radio" name="options" value="Lecture Notes" (change)="onOptionChange($event)"
+                            class="radio_btn">
+                        <span class="option_name">Lecture Notes</span>
+                    </label>
+                    <label class="radio_option">
+                        <input type="radio" name="options" value="Questions Bank" (change)="onOptionChange($event)"
+                            class="radio_btn">
+                        <span class="option_name">Questions Bank</span>
+                    </label>
+
+                <!-- </div> -->
+                <!-- <div class="radioOption_container"> -->
+                    <label class="radio_option">
+                        <input type="radio" name="options" value="Summary" (change)="onOptionChange($event)"
+                            class="radio_btn">
+                        <span class="option_name">Summary</span>
+                    </label>
+                    <label class="radio_option">
+                        <input type="radio" name="options" value="Assignment" (change)="onOptionChange($event)"
+                            class="radio_btn">
+                        <span class="option_name">Assignment</span>
+                    </label>
+                    <label class="radio_option">
+                        <input type="radio" name="options" value="Question Paper" (change)="onOptionChange($event)"
+                            class="radio_btn">
+                        <span class="option_name">Question Paper</span>
+                    </label>
+                <!-- </div> -->
+                <!-- <div class="radioOption_container"> -->
+                    <label class="radio_option">
+                        <input type="radio" name="options" value="Lab Manual" (change)="onOptionChange($event)"
+                            class="radio_btn">
+                        <span class="option_name">Lab Manual</span>
+                    </label>
+                    <label class="radio_option">
+                        <input type="radio" name="options" value="Other" (change)="onOptionChange($event)"
+                            class="radio_btn">
+                        <span class="option_name">Other</span>
+                    </label>
+                <!-- </div> -->
+            </div>
+            <span class="label_name">Describe about your file</span>
+            <textarea rows="7" cols="40" placeholder="File Description" name="fileDescription"
+                [(ngModel)]="fileDescription" required></textarea>
+            <div class="error-msg">{{errorMsg}}</div>
+            <button type="submit" class="file-details-add_button">
+                <fa-icon [icon]="faCloudUpload"></fa-icon>
+                <span>Upload Details</span>
+            </button>
+        </form>
+    </div>
+    <div class="privacy-note-container">
+        <span>Tutdocs <span class="term-link">Terms of Use</span> and <span class="term-link">Privacy
+                policy</span>.</span>
+    </div>
+</div>

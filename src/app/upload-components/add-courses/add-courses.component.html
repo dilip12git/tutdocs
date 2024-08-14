@@ -1,0 +1,26 @@
+<div class="container">
+    <div *ngIf="uploadingData" class="loading-container">
+        <mat-spinner diameter="50" color="custom-green"></mat-spinner>
+      </div>
+    <h3>Add your course details</h3>
+    <form (ngSubmit)="submitForm()">
+        <div class="input-container">
+            <label for="addCourse_name">Course name</label>
+            <input type="text" placeholder="Course name" [(ngModel)]="courseName" name="courseName" required>
+        </div>
+        <div class="input-container">
+            <label for="addCourse_code">Course code</label>
+            <input type="text" placeholder="Course code" [(ngModel)]="courseCode" name="courseCode" required>
+        </div>
+        <div class="error_and_btn_container">
+            <span class="error-msg">{{errorMsg}}</span>
+            <div class="button-container">
+                <button type="submit">
+                <fa-icon [icon]="faMailForward"></fa-icon>
+                <span>submit</span>
+            </button>
+                <!-- <input type="submit" value="Submit"> -->
+            </div>
+        </div>
+    </form>
+</div>

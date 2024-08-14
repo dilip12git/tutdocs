@@ -1,0 +1,814 @@
+.reviews_and_download_container{
+    /* position: sticky; */
+    /* top: 12.5%; */
+    /* position: relative; */
+    padding: 8px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    z-index: 1;
+    background: whitesmoke;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+   
+}
+.reviews_button_container button{
+  padding: 6px 15px !important;
+  font-size: small !important;
+  border-radius: 100px;
+}
+.liked {
+    color: #04ad42; 
+  }
+  .bookmark-icon{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+.reviews_button_container{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    gap: 10px;
+}
+.file_info_button{
+   
+    border: 1px solid #ccc;
+    color: dimgray;
+    background: white;
+  }
+  .file_info_button:hover{
+    color: #04ad42;
+
+  }
+  .download_button_container{
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+     
+  }
+  .download_button{
+    /* background: #04ad42 !important; */
+    display: flex;
+    border: none !important;
+    color: white !important;
+  }
+.file_info_button,.download_button{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 8px;
+    font-size: medium;
+    cursor: pointer;
+    padding: 6px 15px;
+    border-radius: 100px;
+}
+.reviews_button_container button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 8px;
+    background: white;
+    border: 1px solid #ccc;
+    color: dimgray;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 2px 15px;
+    border-radius: 100px;
+}
+.reviews_button_container button:hover{
+    color: #04ad42;
+}
+
+pdf-viewer {
+    width: 100%;
+    height:92vh;
+     /* height:100%; */
+
+
+}
+
+.pdf_viewer_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pdf_controls_container{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    background: white;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 100px;
+    border: 1px solid #ccc;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.pdf_controls_container button{
+    background: transparent;
+    color: dimgray;
+    border: none;
+    cursor: pointer;
+    font-size: larger;
+}
+.viewer_main_container{
+    width: 100%;
+    background: whitesmoke;
+}
+.pdf_controls_container button:hover{
+color: #04ad42;
+}
+  .document-viewer ngx-doc-viewer {
+    flex: 1 1 auto;
+    width:100%;
+   height:98vh;
+    border: none; 
+    background: whitesmoke;
+  }
+ 
+
+@keyframes openContainer {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.floating-button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    background: #04ad42;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.floating-button-container:hover{
+background: #04ad42;
+}
+.floating-button-container fa-icon{
+font-size: 25px;
+}
+.upload-icon-nav,.myLibrary{
+    display: none;
+}
+
+.share_dilog_box_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.share_container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 16px;
+    width: 300px;
+    height: fit-content;
+    background: white;
+    box-shadow: 0px 8px 24px 0px rgba(140, 149, 159, 0.2);
+    border-radius: 5px;
+    animation-name: openContainer;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+@keyframes openContainer {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.copy_link_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0px 0px 0px 5px; /* top right bottom left */
+    
+}
+.share_title_and_close_button{
+    font-size:large;
+    color: dimgray;
+    font-weight: 600;
+}
+.close_icon{
+    cursor: pointer;
+}
+.close_icon:hover{
+color: red;
+}
+.link {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;  /* Optional: Adds ellipsis (...) when text overflows */
+}
+
+.copy_link_button{
+    border-radius: 5px !important;
+    background: whitesmoke !important;
+    padding: 8px 12px !important;
+    border-left: 1px solid #ccc;
+    border-top: none !important;
+    border-bottom: none  !important;
+    border-right: none  !important;
+}
+.social_media_share_container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+.whatAppIcon{
+    background: #04ad42;
+    color: white;
+}
+.faceBookIcon{
+    background: #3092FA;
+    color: white;
+  
+}
+.whatAppIcon,.faceBookIcon{
+    width: 100%;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+
+}
+.whatAppIcon:hover,.faceBookIcon:hover{
+opacity: .8;
+}
+.share_title_and_close_button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skeleton_viewer_main_container{
+    position: sticky;
+    top: 12.5%;
+    padding: 8px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+    z-index: 1;
+    background: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+   
+}
+.skeleton_card_Info_card
+{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+.skeleton_upc{
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border-radius: 50%; 
+    animation: pulse 1.5s ease-in-out infinite;
+}
+.skluifo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+.sktxtm{
+    max-width: 150px; 
+    min-width: 100px;
+    height:12px;
+    background-color: white;
+    border-radius: 0px; 
+    animation: pulse 1.5s ease-in-out infinite;
+}
+.stxt{
+    max-width: 150px; 
+    min-width: 150px;
+    height:8px !important;
+
+}
+.skeleton_reviewSbutton_container{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.skeleton_review_button{
+    max-width: 80px; 
+    min-width: 60px;
+    height: 30px;
+    background-color: white;
+    border-radius: 100px; 
+    animation: pulse 1.5s ease-in-out infinite;  
+}
+
+
+
+  /* Animation effect */
+  @keyframes pulse {
+    0% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+  .fileNotFoundContainer{
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999; /* Higher z-index than overlay */
+    color: dimgray;
+    animation-name: login;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    
+  }
+  .clsbtn{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    background: #04ad42;
+    color: white;
+    width: fit-content;
+    margin-top: 20px;
+    padding: 6px 12px;
+    cursor: pointer;
+    border:none;
+    margin-left: auto;
+    border-radius: 4px;
+  }
+  .clsbtn:hover{
+  background: #1FB141;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background color */
+    z-index: 998; /* Lower z-index than login container */
+  }
+  
+  .login-container {
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999; /* Higher z-index than overlay */
+    
+    animation-name: login;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    
+}
+@keyframes login {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+  }
+  
+  .close-button:hover {
+    color: red;
+  }
+  .buttons_container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .continue_with_email_container{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .continue_with_email_container button{
+   width: 140px;
+  }
+  .buttons_container button{
+    padding: 8px 12px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: 600;
+  }
+  .login_with_google_btn{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .google_icon{
+    width: 25px;
+    height: 25px
+  }
+  .buttons_container button:hover{
+    color: #3092FA;
+  }
+ 
+  .fh_item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:flex-start;
+    gap: 15px;
+    /* padding: 8px 12px; */
+    color: dimgray;
+    cursor: pointer;
+  }
+  .fh_item:hover{
+    color: #04ad42 !important;
+  }
+.uploaded_user_profile_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    gap: 6px;
+  
+
+}
+
+  .profile_image{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-position: cover;
+    background: white;
+  }
+  .user_name{
+    font-size: small;
+    font-weight: 600;
+    color: dimgray;
+  }
+  .follow_button_container{
+    background: transparent;
+    color: #3092FA;
+    border: none;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .follow_button_container:hover{
+    text-decoration: underline;
+  }
+  .user_flw{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2px;
+  }
+  .user_info_container{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+  .point_circle{
+    width: 3px;
+    height: 3px;
+    background: #CCC;
+    border-radius: 100%;
+  }
+  .follower_count_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    color: #CCC;
+  }
+  .file_info_container{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    position: absolute;
+    background: white;
+    width: 100%;
+    max-height: 400px;
+    z-index: 1;
+    margin-top:0%;
+    /* left: 0; */
+    /* right: 0; */
+    transform-origin: top;
+    animation: transform .3s;   
+    padding: 8px 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+  }
+
+  .related_title{
+    color: #858585;
+    padding: 4px 0px;
+    font-size: small;
+    border-bottom: 1px solid #3092FA;
+    width: fit-content;
+  }
+  .file_info_title{
+    color: dimgray;
+    font-size: small;
+  }
+  .file_infoctrt{
+    /* border-right: 1px solid #ccc; */
+    /* flex: 1; */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .file_info_fdf{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #3092FA;
+    font-size: small;
+    cursor: pointer;
+  }
+  .course_name:hover,
+  .institute_name:hover,
+  .file_title:hover{
+    text-decoration: underline;
+  }
+  .file_related_post{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .related_content{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 15px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+  }
+  .related_item{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width:230px;
+  }
+  .related_file_info{
+    display: flex;
+    flex-direction: column;
+  }
+  .thumnail_img{
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 10px;
+    border: 4px solid #ccc;
+    background-position: center;
+  }
+  .related_file_name{
+    font-size: small;
+    color: #3092FA;
+    cursor: pointer;
+    text-wrap: break-word;
+  }
+  .related_file_course{
+    color: dimgray;
+    font-size: 9px;
+    cursor: pointer;
+  }
+  .related_file_name:hover,.related_file_course:hover{
+text-decoration: underline;
+  }
+  .close_container{
+    background: rgba(245, 245, 245, 0.123);
+    color: black;
+    font-size: larger;
+    border-radius: 50%;
+    position: fixed;
+    margin-left: auto;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes transform {
+    from{
+        transform: scale(0);
+    }
+    to{
+      transform: scale(1);
+
+    }
+    
+  }
+  @media screen and (max-width:1100px) {
+
+      .viewer_main_container{
+        width: 100%;
+        background: whitesmoke;
+    }
+    .file_info_container{
+      width: 100%;
+    }
+
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .pdf_controls_container{
+        bottom: 12%;
+        right: 2%;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.877);
+    }
+    /* .file_info_container{
+      flex-direction: column;
+    } */
+    .reviews_and_download_container{
+
+        padding: 4px 6px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 6px;
+
+    }
+    .reviews_button_container{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+    .uploaded_user_profile_container{
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      /* position: relative; */
+      
+    }
+    .user_info_container{
+      display:none;
+     
+    }
+ 
+}
+@media screen and (max-width:510px) {
+    
+    .viewer_main_container{
+        width: 100%;
+        background: whitesmoke;
+    }
+   
+   
+    .related_content{
+      grid-template-columns: auto;
+    }
+    .reviews_button_container button{
+        padding: 5px  10px !important;
+        font-size: small !important;
+        border-radius: 100px;
+    }
+    
+}
+.privacy-note-container {
+  padding: 16px 12px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-size: dimgray;
+  text-align: center;
+}
+.term-link{
+  color: #3092FA;
+  cursor: pointer;
+}
+.term-link:hover{
+  color: #3092FA;
+  text-decoration: underline;
+}
+.feedback_and_help_container{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 8px 15px;
+  border-top: 1px solid whitesmoke;
+  color: dimgray;
+}
+.privacy_policy_container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 15px;
+  color: dimgray;
+  font-size: 11px;
+}

@@ -1,0 +1,71 @@
+<app-simple-header></app-simple-header>
+<div class="container">
+  <div class="share-your-container">
+    <div class="typping-sentence-title">Share your <span class="typed-text">{{ typedText }}</span><span class="static-text">notes</span> to assist fellow
+      students.</div>
+    <span class="title-desc">Support the academic growth of peers by generously offering your well-crafted notes.</span>
+  </div>
+  <div class="upload-desc-and-title-container">
+    <div class="tab-bar-container">
+      <div class="tabBar active-tabBar">
+        <div class="tab">
+          <span class="count-text"><fa-icon [icon]="faCheck"></fa-icon></span>
+          <span class="tab-text">Upload</span>
+        </div>
+        <!-- <div class="border-bottom"></div> -->
+      </div>
+      <div class="tabBar">
+        <div class="tab">
+          <span class="count-text"><fa-icon [icon]="faCheck"></fa-icon></span>
+          <span class="tab-text">Details</span>
+        </div>
+        <!-- <div class="border-bottom"></div> -->
+      </div>
+      <div class="tabBar">
+        <div class="tab">
+          <span class="count-text"><fa-icon [icon]="faCheck"></fa-icon></span>
+          <span class="tab-text">Done</span>
+        </div>
+        <!-- <div class="border-bottom"></div> -->
+      </div>
+    </div>
+    <div class="file-upload" (click)="triggerFileInput()">
+      <div class="drop-area" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+        <fa-icon [icon]="faCloudUpload" class="faCloudUpload"></fa-icon>
+        <h3>Drag & Drop files</h3>
+        <p>Or if you prefer</p>
+        <input type="file" #fileInput (change)="onFileSelected($event)" accept=".pdf,.docx"
+       style="display: none;">
+        <label for="fileInput" class="browse-button">Browse my files</label>
+        <p class="supported_text">Supported files: .pdf,.docx</p>
+      </div>
+    </div>
+    <div class="file-list">
+      <div *ngFor="let file of uploadedFiles" class="file-info">
+        <div class="file-icon-name">
+          <fa-icon [icon]="faFileAlt" class="file-icon"></fa-icon>
+          <span class="file_name">{{ file.name }}</span>
+        </div>
+
+        <div class="file-upload-status">
+          <span class="file-size">{{ fileSize }}</span>
+          <!-- <progress max="100"  [value]="80" class="custom-progress"></progress> -->
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="percentDone"></div>
+          </div>
+          <div *ngIf="uploadingData" class="uploading_status">
+            <mat-spinner diameter="20" color="primary"></mat-spinner>
+          </div>
+          <span>{{ percentDone }}%</span>
+        </div>
+      </div>
+      <button *ngIf="uploadedFiles.length > 0" (click)="navigateToComponentB()" class="file-upload_button">
+        <fa-icon [icon]="faMailForward"></fa-icon>
+        <span>Submit</span>
+      </button>
+    </div>
+    <div class="privacy-note-container">
+      <span>Tutdocs <span class="term-link">Terms of Use</span> and <span
+          class="term-link">Privacy policy</span>.</span>
+    </div>
+  </div>

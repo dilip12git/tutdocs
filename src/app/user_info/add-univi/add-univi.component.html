@@ -1,0 +1,84 @@
+<app-simple-header></app-simple-header>
+<div class="container">
+    <div *ngIf="uploadingData" class="loading-container">
+        <mat-spinner diameter="30" color="primary"></mat-spinner>
+      </div>
+    <div class="page-main-title">
+        <h1>Activate your account</h1>
+        <span>Tell us about yourselft so we can recommend you study material, new features, and much more!</span>
+    </div>
+    <div class="form-container">
+        <div class="form-title-container">
+            <fa-icon [icon]="universityicon" class="univ-icon"></fa-icon>
+            <span class="title">Add your instituion</span>
+        </div>
+        <form>
+           
+             <label for="" class="label_text">Select Your Profession</label>
+             <div class="radioOption_container">
+                <label class="radio_option">
+                    <input type="radio" name="options" value="Student"
+                        (change)="onOptionChange($event)" class="radio_btn">
+                        <span class="option_name">Student</span>
+                </label>
+                <label class="radio_option">
+                    <input type="radio" name="options" value="Teacher"
+                        (change)="onOptionChange($event)" class="radio_btn">
+                        <span class="option_name">Teacher</span>
+                </label>
+                </div>
+            <div class="label_and_spinner_container">
+            <label for="text" class="label_text">{{LabelForStudyAt}}</label>
+            <div class="isSearcing_status">
+                <mat-spinner diameter="15" color="custom-green" *ngIf="isSearching" ></mat-spinner>
+            <div (click)="openAddInstitutionDialog()" class="add-institute addCOurse"><span>Can't find, Add</span></div>
+
+            </div>
+        </div>
+            <div class="search-container">
+                <input type="text" class="input-univi-field" name="searchQuery" placeholder="Search your university / school name"
+                    [(ngModel)]="searchQuery" (keyup)="performSearch()" autocomplete="off"/>
+                    <div class="search-results" *ngIf="searchResults.length > 0">
+                        <div class="results_wrapper_container">
+                            <div class="results_wrapper" *ngFor="let result of searchResults"
+                                (click)="selectResult(result)">
+                                <fa-icon [icon]="universityicon"></fa-icon>
+                                <span class="search_institute_name">{{ result.institution_name }}</span>
+                            </div>
+                        </div>
+
+                    <div (click)="openAddInstitutionDialog()" class="add-institute"><span>Can't find, Add</span></div>
+                </div>
+            </div>
+            <label for="text" class="label_text">{{LabelForJoinDate}}</label>
+            <!-- // <div class="select-container"> -->
+            <div class="options-container">
+                <div class="option" (click)="selectOption('2024')" [class.selected]="selectedOption === '2024'">
+                    2024
+                </div>
+                <div class="option" (click)="selectOption('2023')" [class.selected]="selectedOption === '2023'">
+                    2023
+                </div>
+                <div class="option" (click)="selectOption('2022')" [class.selected]="selectedOption === '2022'">
+                    2022
+                </div>
+                <div class="option" (click)="selectOption('2021')" [class.selected]="selectedOption === '2021'">
+                    2021
+                </div>
+                <div class="option" (click)="selectOption('2020')" [class.selected]="selectedOption === '2020'">
+                    2020
+                </div>
+
+                <div class="option" (click)="selectOption('Other')" [class.selected]="selectedOption === 'Other'">
+                    Other
+                </div>
+                <!-- Add more options as needed -->
+            </div>
+            <div class="error">{{errorMSG}}</div>
+            <!-- </div> -->
+            <input type="submit" value="Continue" class="input-univi-field submit-btn" (click)="uploadUserData()">
+
+        </form>
+    </div>
+    <br><br><br><br>
+</div>

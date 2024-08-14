@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    overflow: scroll;
+    overflow-x: hidden;
+    background: white;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+::-webkit-scrollbar {
+    width: 0;  
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+.container{
+    scroll-behavior: smooth;
+}
+
+*{
+    -webkit-tap-highlight-color: transparent; /* Disable tap highlight for Webkit browsers */
+    touch-action: manipulation; /* Disable touch event default behavior */
+    user-select: none;
+    scroll-behavior: none;
+    -moz-user-select: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}

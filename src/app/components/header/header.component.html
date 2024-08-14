@@ -1,0 +1,43 @@
+<header [ngClass]="scrollDown ? 'scroll-down' : ''">
+  <div class="header_container">
+    <div class="logo_container">
+      <!-- <img src="assets/icon.png" alt="logo" class="main_logo"> -->
+      <span class="site_name">Tutdocs</span>
+
+    </div>
+    <!-- <div class="nav_container">
+      <a href="" class="nav_item home" routerLink="/" routerLinkActive="active_nav" routerLink="/home"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <fa-icon [icon]="home"></fa-icon>
+        <span>Home</span>
+      </a>
+      <a href="" class="nav_item University" routerLink="/universities">
+        <fa-icon [icon]="univ"></fa-icon>
+        <span>University</span>
+      </a>
+      <a href="" class="nav_item High-school" routerLink="/schools">
+        <fa-icon [icon]="school"></fa-icon>
+        <span>High School</span>
+      </a>
+      <a class="nav_item myLibrary" routerLink="/library" routerLinkActive="h_nav_activer"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <fa-icon [icon]="faListCheck"></fa-icon>
+        <span>Library</span>
+      </a>
+      <a routerLink="/upload" class="nav_item upload-icon-nav" routerLinkActive="h_nav_activer"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <fa-icon [icon]="faCloudUpload"></fa-icon>
+        <span>Upload</span>
+
+      </a>
+    </div> -->
+    <div class="sign-inBTN-container">
+      <div id="g_id_onload" data-client_id="186431286028-hk5le5rhebhnqj9hnmpg5r8c7ks5748t.apps.googleusercontent.com"
+        data-context="signin" data-auto_prompt="false">
+      </div>
+      <button class="sign-in-btn" routerLink="/auth/login">Sign In</button>
+
+
+    </div>
+  </div>
+</header>

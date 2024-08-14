@@ -1,0 +1,16 @@
+<app-simple-header></app-simple-header>
+<div class="container">
+    <div class="success_message_container" *ngIf="tokenVerifiedMessage">
+        <div class="check_icon">
+            <fa-icon [icon]="faCheck"></fa-icon>
+        </div>
+        <h1>Email verified successfully!</h1>
+    </div>
+    <div class="success_message_container" *ngIf="!tokenVerifiedMessage">
+        <div class="check_icon error">
+            <fa-icon [icon]="faTimes"></fa-icon>
+        </div>
+        <h1>Invalid Token or already Verified !</h1>
+    </div>
+  
+</div>

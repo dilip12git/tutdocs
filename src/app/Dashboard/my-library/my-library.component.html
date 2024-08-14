@@ -1,0 +1,218 @@
+<div class="container">
+    <div class="ifUserAuthenticated_container" *ngIf="isAuthenticated">
+        <div class="wrapper_container">
+            <div *ngIf="isRecentlyViewdLoading; else loadRecentlyViewedDoc">
+                <div class="skeleton-container">
+                    <div class="card-title">
+                        <div class="skeleton-icon"></div>
+                        <div class="skeleton-title"></div>
+                    </div>
+                    <div class="card-container">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #loadRecentlyViewedDoc>
+                <div class="wrapper_title_container">
+                    <div class="icon_container">
+                        <fa-icon [icon]="faHistory" class="title-icon"></fa-icon>
+                    </div>
+                    <span class="title">Recently Viewed Documents</span>
+                </div>
+                <div *ngIf="isRecviewedDoc; else loadError">
+                    <div class="wrapper_content">
+                        <div class="wrapper_item" *ngFor=" let item of recentlyViewedList">
+                            <div class="thumbnail_container" (click)="viewDocument(item.file_key)">
+                                <img src="{{item.thumnail_url}}" class="thumbnail_img" alt="">
+                            </div>
+                            <div class="doc_info">
+                                <span class="file_title" (click)="viewDocument(item.file_key)">{{item.file_title}}</span>
+                                <span class="file_course"(click)="openCourse(item.course_name,item.course_code)">{{item.course_name}} ({{item.course_code}})</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #loadError>
+                    <div class="ifNotFound">
+                        <span>You haven't viewed any document yet!</span>
+                       </div>
+                </ng-template>
+
+            </ng-template>
+        </div>
+        <div class="wrapper_container">
+            <div *ngIf="isFollowedCoursesLoading; else loadFollowedCourse">
+                <div class="skeleton-container">
+                    <div class="card-title">
+                        <div class="skeleton-icon"></div>
+                        <div class="skeleton-title"></div>
+                    </div>
+                    <div class="card-container">
+                        <div class="skeleton-course-card"></div>
+                        <div class="skeleton-course-card"></div>
+                        <div class="skeleton-course-card"></div>
+                        <div class="skeleton-course-card"></div>
+                        <div class="skeleton-course-card"></div>
+                        <div class="skeleton-course-card"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #loadFollowedCourse>
+                <div class="wrapper_title_container">
+                    <div class="icon_container">
+                        <fa-icon [icon]="faFolder" class="title-icon"></fa-icon>
+                    </div>
+                    <span class="title">Followed Courses</span>
+                </div>
+                <div *ngIf="isCourses; else loadError">
+                    <div class="wrapper_content">
+                        <div class="course_wrapper_item" *ngFor=" let item of followedCoursesList">
+                            <div class="course_icon_container" (click)="openCourse(item.course_name,item.course_code)">
+                                <fa-icon [icon]="faFolder" class="course-icon"></fa-icon>
+                            </div>
+                            <div class="doc_info" (click)="openCourse(item.course_name,item.course_code)">
+                                <span class="file_title" >{{item.course_name}}</span>
+                                <span class="file_course">{{item.course_code}} | {{item.no_of_files}} Documents</span>
+                            </div>
+                            <div class="check_icon_container" (click)="unFollowCourses(item.course_name);">
+                                <fa-icon [icon]="faMinus" class="followed_icon"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #loadError>
+                    <div class="ifNotFound">
+                        <span>You haven't followed any courses yet!</span>
+                       </div>
+                </ng-template>
+            </ng-template>
+        </div>
+        <div class="wrapper_container">
+            <div *ngIf="isBookeMarkedLoading; else loadBookMarkedDoc">
+                <div class="skeleton-container">
+                    <div class="card-title">
+                        <div class="skeleton-icon"></div>
+                        <div class="skeleton-title"></div>
+                    </div>
+                    <div class="card-container">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #loadBookMarkedDoc>
+                <div class="wrapper_title_container">
+                    <div class="icon_container">
+                        <fa-icon [icon]="faBookmark" class="title-icon"></fa-icon>
+                    </div>
+
+                    <span class="title">Bookmarked Documents</span>
+                </div>
+                <div *ngIf=" isBookMarkedDoc; else loadError">
+                    <div class="wrapper_content">
+                        <div class="wrapper_item" *ngFor=" let item of bookMarkedList">
+                            <div class="thumbnail_container" (click)="viewDocument(item.file_key)" >
+                                <img src="{{item.thumnail_url}}" class="thumbnail_img" alt="">
+                            </div>
+                            <div class="doc_types_and_icon">
+                                <div><span>{{item.file_type}}</span></div>
+                                <div class="bookmarked_icon_container" (click)="removeBookMark(item.file_key);">
+                                    <fa-icon [icon]="faBookmark" class="bookmark-icon"></fa-icon>
+                                </div>
+                            </div>
+                                <div class="doc_info">
+                                    <span class="file_title"  (click)="viewDocument(item.file_key)">{{item.file_title}}</span>
+                                    <span class="file_course" (click)="openCourse(item.course_name,item.course_code)">{{item.course_name}} ({{item.course_code}})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #loadError>
+                       <div class="ifNotFound">
+                        <span>You haven't added any document yet !</span>
+                       </div>
+                    </ng-template>
+            </ng-template>
+        </div>
+        <div class="wrapper_container">
+            <div *ngIf="isMyDocLoading; else loadMyDoc">
+                <div class="skeleton-container">
+                    <div class="card-title">
+                        <div class="skeleton-icon"></div>
+                        <div class="skeleton-title"></div>
+                    </div>
+                    <div class="card-container_mydoc">
+                        <div class="skeleton-card_mydoc"></div>
+                        <div class="skeleton-card_mydoc"></div>
+                        <div class="skeleton-card_mydoc"></div>
+                        <div class="skeleton-card_mydoc"></div>
+                        <div class="skeleton-card_mydoc"></div>
+                        <div class="skeleton-card_mydoc"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #loadMyDoc>
+                <div class="wrapper_title_container">
+                    <div class="icon_container">
+                        <fa-icon [icon]="faFileAlt" class="title-icon"></fa-icon>
+                    </div>
+                    <span class="title">My Documents</span>
+                </div>
+                <div *ngIf=" isPostDoc; else loadError">
+                    <div class="wrapper_content_mydoc">
+                        <div class="wrapper_item_mydoc" *ngFor="let files of fileDestails">
+                            <div class="thumbnail_container_mydoc"  (click)="viewDocument(files.file_key)">
+                                <img src="{{files.thumnail_url}}" class="thumbnail_img_mydoc" alt="">
+                            </div>
+                            <div class="doc_info">
+                                <span class="file_title"  (click)="viewDocument(files.file_key)">{{files.file_title}}</span>
+                                <span class="file_course" (click)="openCourse(files.course_name,files.course_code)">{{files.course_name}} | {{files.course_code}}</span>
+                                <span class="file_course">{{files.upload_date}}</span>
+                                <div class="reviews">
+                                    <div class="reviews_item">
+                                        <span>{{files.like_count}}</span>
+                                        <fa-icon [icon]="faThumbsUp"></fa-icon>
+                                    </div>
+                                    <div class="reviews_item">
+                                        <span>{{files.view_count}}</span>
+                                        <fa-icon [icon]="faEye"></fa-icon>
+                                    </div>
+                                    <div class="reviews_item">
+                                        <span>{{files.download_count}}</span>
+                                        <fa-icon [icon]="faCloudDownload"></fa-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #loadError>
+                    <div class="ifNotFound">
+                        <span>You haven't uploaded any document yet !</span>
+                       </div>
+                </ng-template>
+            </ng-template>
+        </div>
+    </div>
+    <div class="ifUserUnAuthenticated_container" *ngIf="!isAuthenticated">
+        <div class="login_required_message">
+            <span>You need to login, to get your added documents</span>
+            <button class="loginBtn" routerLink="/auth/login">Login now</button>
+        </div>
+    </div>
+</div>

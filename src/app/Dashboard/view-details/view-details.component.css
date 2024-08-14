@@ -1,0 +1,103 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 15px 12px;
+    gap: 20px;
+    max-width: 900px;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 50px;
+}
+.title_container{
+    color: black;
+    font-size: large;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    }
+ 
+    fa-icon{
+        font-size: 20px;
+    }
+.file_detail_container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.details{
+    display: flex;
+    gap: 20px;
+}
+.file_info{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.text_box{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+}
+    .img{
+        max-width: 150px;
+        min-width:150px;
+        max-height: 150px;
+        min-height: 150px;
+        border-radius: 10px;
+        border: 5px solid whitesmoke;
+    }
+    .title{
+        color: dimgray;
+        font-size: small;
+        text-wrap: nowrap;
+    }
+    .file_title{
+        color: #3092FA;
+        font-size: large;
+        font-weight: 600;
+        text-wrap: break-word;
+
+    }
+    .text{
+        color: #3092FA;
+        font-size: small;
+        text-wrap: break-word;
+    }
+
+    .buttons_container{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+
+    }
+    .buttons_container button{
+        background: transparent;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        color: dimgray;
+        font-size: small;
+        padding: 4px 12px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    button fa-icon{
+        font-size: small;
+    }
+    .buttons_container button:hover{
+        color: #3092FA;
+    }
+
+    @media screen and (max-width:600px) {
+        .details{
+            display: flex;
+            flex-direction:column ;
+        }
+       
+    }

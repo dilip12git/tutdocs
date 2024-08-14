@@ -1,0 +1,22 @@
+.container{
+    text-align: center;
+    margin-top: 20px;
+    font-size: small;
+    columns: dimgrey;
+    padding: 8px 12px;
+}
+.privacy-note-container {
+    padding: 16px 0px;
+    margin-top: 20px;
+    font-size: 14px;
+    font-size: dimgray;
+    text-align: center;
+  }
+  .term-link,.dev-name{
+    color: #3092FA;
+    cursor: pointer;
+  }
+  .term-link:hover,.dev-name:hover{
+    color: #3092FA;
+    text-decoration: underline;
+  }

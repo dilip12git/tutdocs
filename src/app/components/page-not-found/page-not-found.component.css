@@ -1,0 +1,47 @@
+/* page-not-found.component.css */
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f8f8;
+  }
+  
+  .error-content {
+    text-align: center;
+  }
+  
+  .not-found-heading {
+    font-size: 6em;
+    margin: 0;
+    color: #333;
+    animation: bounceRotateStabilize 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) both;
+  }
+  
+  @keyframes bounceRotateStabilize {
+    0% {
+      transform: translateY(-200px) rotate(0deg);
+    }
+    60% {
+      transform: translateY(50px) rotate(360deg);
+    }
+    100% {
+      transform: translateY(0) rotate(360deg);
+    }
+  }
+  
+  .error-content button {
+    padding: 10px 20px;
+    font-size: medium;
+    border-radius: 4px;
+    border: none;
+    background-color: #04ad42;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .error-content button:hover {
+    background-color: #04aa41;
+  }

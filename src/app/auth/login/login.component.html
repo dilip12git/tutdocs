@@ -1,0 +1,40 @@
+<app-simple-header></app-simple-header>
+<div class="container">
+  <div *ngIf="uploadingData" class="loading-container">
+    <mat-spinner diameter="30" color="primary"></mat-spinner>
+  </div>
+    <div class="form_container">
+      <div class="title_container">
+        <span>Login</span>
+      </div>
+      <span class="title_Desc">Get best study materials from your institution.</span>
+      <form (ngSubmit)="submitForm()">
+        <input type="email" placeholder="Email address" class="input-box" [(ngModel)]="userEmail" name="userName" autocomplete="email">
+        <!-- <input type="password" placeholder="Password" class="input-box" [(ngModel)]="userPass" name="userPass" autocomplete="on"> -->
+        <div class="password-input">
+          <input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Create new password" class="input-box" [(ngModel)]="userPass" name="userPass" autocomplete="email">
+          <fa-icon [icon]="showPassword ? faEyeSlash : faEye" (click)="toggleShowPassword('userPass')" class="eye-icon"></fa-icon>
+        </div>
+        <div class="forgot_container">
+          <span class="err">{{errorMessage}}</span>
+          <span routerLink="/auth/forgot-password" class="forgot-pass">Forgot password</span>
+        </div>
+        <input type="submit" value="Login"  class="submitBTN">
+        <div class="dont_have_account_container">
+          <span >Don't have an account? <span class="reg_text" routerLink="/auth/register">Register</span></span>
+        </div>
+      </form>
+      <div class="or_container">
+        <div class="line"></div>
+        <span class="or_text">OR</span>
+        <div class="line"></div>
+      </div>
+      <button class="google_login_container" (click)="googleLogin()">
+        <img src="assets/icon/google-icon.png" alt="" class="google_icon" >
+        <span>Continue with Google</span>
+      </button>
+    </div>
+    <div class="privacy-note-container">
+        <span>By signing up, you agree to Tutdocs <span class="term-link" routerLink="/terms">Terms of Use</span> and <span class="term-link" routerLink="/privacy-policy">Privacy policy</span>.</span>
+    </div>
+    </div>

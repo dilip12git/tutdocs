@@ -1,0 +1,32 @@
+<app-simple-header></app-simple-header>
+<div class="container" >
+
+  <div class="skeleton_wrapper" *ngIf="isLoading else loadContent">
+    <div class="skeleton_success-icon-container"></div>
+    <div class="skeleton_success_text"></div>
+    <div class="skeleton_button_container">
+      <div class="skeleton_button"></div>
+      <div class="skeleton_button"></div>
+    </div>
+  </div>
+  <ng-template #loadContent>
+  <div class="wrapper">
+    <div class="success-icon-container">
+      <fa-icon [icon]="faCheck"></fa-icon>
+    </div>
+    <h3>File uploaded successfully !</h3>
+
+
+  <div class="button_container">
+    <button class="btn goto-home" routerLink="/home">
+      <fa-icon [icon]="faHome"></fa-icon>
+      <span> Back to home</span>
+    </button>
+    <button class="btn upload-more" routerLink="/upload">
+      <fa-icon [icon]="faCloudUpload"></fa-icon>
+      <span>Upload more</span>
+    </button>
+  </div>
+</div>
+</ng-template>
+</div>

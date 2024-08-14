@@ -1,0 +1,187 @@
+<div class="container">
+    <div class="viewer_main_container">
+        <div *ngIf="isLoadingReviews; else reivewsLoaded">
+            <div class="skeleton_viewer_main_container">
+                <div class="skeleton_card_Info_card">
+                    <div class="skeleton_upc"></div>
+                    <div class="skluifo">
+                        <div class="sktxtm"></div>
+                        <div class="sktxtm stxt"></div>
+                    </div>
+                </div>
+                <div class="skeleton_reviewSbutton_container">
+                    <div class="skeleton_review_button"></div>
+                    <div class="skeleton_review_button"></div>
+                    <div class="skeleton_review_button"></div>
+                    <div class="skeleton_review_button"></div>
+                    <div class="skeleton_review_button"></div>
+                    <div class="skeleton_card_download_andInfo_button"></div>
+
+                </div>
+            </div>
+        </div>
+        <ng-template #reivewsLoaded>
+            <div class="reviews_and_download_container">
+                <div class="uploaded_user_profile_container" *ngIf="uploaded_userData">
+                    <div class="profile_image_container" (click)="showUserProfile(uploaded_userData.user_id)">
+                        <img [src]="uploaded_userData.profile_picture" alt="" class="profile_image">
+                    </div>
+                    <div class="user_info_container">
+                        <div class="user_flw">
+                            <span class="user_name"
+                                (click)="showUserProfile(uploaded_userData.user_id)">{{uploaded_userData.name}}</span>
+                            <button class="follow_button_container" *ngIf="followButton"
+                                (click)="followOrUnfollowUser()">
+                                <ng-container *ngIf="isFollowed && isFollowedBy">Following</ng-container>
+                                <ng-container *ngIf="isFollowed && !isFollowedBy">Unfollow</ng-container>
+                                <ng-container *ngIf="!isFollowed && isFollowedBy">Follow Back</ng-container>
+                                <ng-container *ngIf="!isFollowed && !isFollowedBy">Follow</ng-container>
+                            </button>
+                        </div>
+                        <div class="follower_count_container" (click)="showUserProfile(uploaded_userData.user_id)">
+                            <span class="follower">{{followerCount}} followers</span>
+                            <div class="point_circle"></div>
+                            <span class="following">{{followingCount}} followings</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviews_button_container">
+                    <button class="file_info_button" (click)="toggleFileInfo($event);">
+                        <fa-icon [icon]="faInfoCircle" *ngIf="!isFileInfOpen" ></fa-icon>
+                        <fa-icon [icon]="faTimes" *ngIf="isFileInfOpen"></fa-icon>
+                    </button>
+
+                    <button (click)="toggleBookmark()">
+                        <ng-container *ngIf="isBookMarked">
+                            <img src="assets/icon/bookmark-solid.png" class="bookmark-icon">
+                        </ng-container>
+                        <ng-container *ngIf="!isBookMarked">
+                            <img src="assets/icon/bookmark-regular.png" class="bookmark-icon">
+                        </ng-container></button>
+                    <!-- Add this line to your component template -->
+                    <button (click)="toggleLike(userId, fileDetails[0].file_key,fileDetails[0].file_title)">
+                        <fa-icon [icon]="faThumbsUp" [ngClass]="{'liked': isLiked}"></fa-icon>
+                        <span>{{likes}}</span>
+                    </button>
+
+                    <button><fa-icon [icon]="faEye"></fa-icon><span>{{views}}</span></button>
+                    <button (click)="toggleShare($event)" class="share_button"><fa-icon
+                            [icon]="faMailForward"></fa-icon></button>
+
+                    <button (click)="downloadFile(fileDetails[0].file_url,fileDetails[0].file_name)"
+                    class="download_button" style="background-image: linear-gradient(45deg, #04ad42, #3092FA);"><fa-icon [icon]="faCloudDownload"></fa-icon></button>
+                </div>
+
+            </div>
+
+        </ng-template>
+        <div class="file_info_container" *ngIf="isFileInfOpen">
+            <!-- <div class="close_container">
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </div> -->
+            <div class="file_infoctrt" *ngIf="fileDetails">
+                <div class="related_title" *ngIf="!showFileNotFoundMessage">
+                    <span>File Information</span>
+                </div>
+                <div class="file_info_fdf">
+                    <span class="file_title"><span class="file_info_title">  Title-</span> {{fileDetails[0].file_title}}</span>
+                    <span class="file_type"><span class="file_info_title">  File type-</span> {{fileDetails[0].file_type}}</span>
+               
+                    <span class="course_name"
+                        (click)="openCourse(fileDetails[0].course_name,fileDetails[0].course_code)"><span class="file_info_title">  Course-</span> {{fileDetails[0].course_name}}({{fileDetails[0].course_code}})</span>
+    
+                    <span class="institute_name"
+                        (click)="gotoInstitutions(fileDetails[0].institute_name)"><span class="file_info_title">  Institution-</span> {{fileDetails[0].institute_name}}</span>
+                </div>
+
+            </div>
+            <div class="file_related_post">
+                <div class="related_title" *ngIf="!showFileNotFoundMessage">
+                    <span>Related Post</span>
+                </div>
+                <div class="related_content">
+                    <div class="related_item" *ngFor=" let relatedFiles of fetchRelatedFileDetails">
+                        <div class="thumnail_container"
+                            (click)="viewDocument(relatedFiles.file_key)"
+                            (click)="onRouterLinkClick()">
+                            <img [src]="relatedFiles.thumnail_url" alt="" class="thumnail_img">
+                        </div>
+                        <div class="related_file_info">
+                            <span class="related_file_name"
+                                (click)="viewDocument(relatedFiles.file_key)"
+                                (click)="onRouterLinkClick()">{{relatedFiles.file_title}}</span>
+                            <span class="related_file_course"  (click)="openCourse(relatedFiles.course_name,relatedFiles.course_code)" >{{relatedFiles.course_name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div *ngIf="showFileNotFoundMessage" class="overlay"></div>
+        <div *ngIf="showFileNotFoundMessage  else showFile" class="fileNotFoundContainer">
+            <h3>File not found !</h3>
+            <span>The file you are trying to open may have been deleted or the URL may be incorrect.</span>
+            <button class="clsbtn" routerLink="/home">Close</button>
+        </div>
+        <ng-template #showFile>
+            <div id="pdf_viewer_container" *ngIf="fileType === 'pdf'" class="pdf-container">
+                <pdf-viewer [src]="pdfData" [rotation]="0" [original-size]="false" [show-all]="true"
+                    [fit-to-page]="false" [zoom-scale]="'page-fit'" [stick-to-page]="false" [render-text]="true"
+                    [external-link-target]="'blank'" [autoresize]="true" [show-borders]="true" [zoom]="zoom"
+                    [page]="currentPage" (after-load-complete)="onPdfLoadComplete($event)" class="pdf-viewer" useBrowserLocale="true">
+                </pdf-viewer>
+                <div class="pdf_controls_container">
+                    <!-- <button (click)="prevPage()"><fa-icon [icon]="faAngleLeft"></fa-icon> </button>
+                        <span>{{ currentPage }} / {{ totalPages }}</span>
+                        <button (click)="nextPage()"><fa-icon [icon]="faAngleRight"></fa-icon></button> -->
+                    <button (click)="zoomIn()"><fa-icon [icon]="faMagnifyingGlassPlus"></fa-icon></button>
+                    <button (click)="zoomOut()"><fa-icon [icon]="faMagnifyingGlassMinus"></fa-icon></button>
+                </div>
+            </div>
+            <div class="document-viewer" *ngIf="fileType === 'doc'">
+                <ngx-doc-viewer [viewerUrl]="'https://docs.google.com/gview?url=%URL%&embedded=true'" [url]="docUrl"
+                    viewer="url"></ngx-doc-viewer>
+            </div>
+
+        </ng-template>
+    </div>
+</div>
+<div class="share_dilog_box_container" *ngIf="isOpenShareContainer">
+    <div class="share_container">
+        <div class="share_title_and_close_button">
+            <span class="share_title">Share On</span>
+            <fa-icon [icon]="faTimes" class="close_icon" (click)="closeShareOption()"></fa-icon>
+        </div>
+        <div class="social_media_share_container">
+            <div class="faceBookIcon" (click)="openFacebook()"><fa-icon
+                    [icon]="faFacebook"></fa-icon><span>Facebook</span></div>
+            <div class="whatAppIcon" (click)="openWhatsApp()"><fa-icon
+                    [icon]="faWhatsapp"></fa-icon><span>WhatsApp</span></div>
+        </div>
+        <div class="copy_link_container">
+            <div class="link">{{shareLink}}</div>
+            <button class="copy_link_button" (click)="copyShareLink()">Copy Link</button>
+
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="displayLogin">
+    <div *ngIf="displayLogin" class="overlay" (click)="closeLogin()"></div> <!-- Background overlay -->
+    <div *ngIf="displayLogin" class="login-container">
+        <span class="close-button" (click)="closeLogin()"> <fa-icon [icon]="faTimes"></fa-icon></span>
+        <h2>Login to continue</h2>
+        <span>Login to get best study materials</span>
+        <div class="buttons_container">
+            <div class="continue_with_email_container">
+                <button (click)="login()">Login</button>
+                <button (click)="register()">Register</button>
+            </div>
+            <button class="login_with_google_btn" (click)="loginWithGoogle()"><img src="assets/icon/google-icon.png"
+                    alt="" class="google_icon"> Continue with Google</button>
+        </div>
+        <div class="privacy-note-container">
+            <span>By continue, you agree to <span class="term-link" routerLink="/terms">Terms of Use</span> and <span
+                    class="term-link" routerLink="/privacy-policy">Privacy policy</span>.</span>
+        </div>
+    </div>
+</ng-container>

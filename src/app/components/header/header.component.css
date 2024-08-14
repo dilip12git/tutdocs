@@ -1,0 +1,186 @@
+header {
+  z-index: 10;
+  position: sticky;
+  top: 0%;
+  background:transparent;
+
+  transition: .3s ease-in;
+}
+
+.header_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px;
+
+}
+.scroll-down {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+.logo_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.main_logo {
+  width: 40px;
+}
+
+.site_name {
+  font-size: 25px;
+  font-weight: bold;
+  font-family: "Goudy Bookletter 1911", sans-serif;
+  color: #04ad42;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav_item {
+  color: dimgray;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 8px 12px;
+}
+
+.nav_item:hover {
+  color: #04ad42;
+
+}
+.upload-icon-nav,.myLibrary{
+  display: none;
+}
+.sign-inBTN-container {
+  max-width: 100px;
+  margin-left: auto;
+}
+
+.sign-in-btn {
+  background: #04ad42;
+  color: white;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.nav_item.active_nav{
+  color: #04ad42 !important;
+}
+
+/* Your existing CSS styles */
+
+
+.title-color {
+  color: black !important;
+}
+
+.nav-item-color {
+  color: dimgray;
+}
+
+.nav-item-color:hover {
+  color: #04ad42;
+}
+
+.docs-color {
+  color: #04ad42;
+}
+
+
+
+.documents {
+  display: none;
+}
+/* 
+.home {
+  display: none;
+} */
+.nav_container fa-icon{
+  display: none;
+}
+@media screen and (max-width:768px) {
+  .nav_item {
+    color: dimgray;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: small;
+    padding: 8px 12px;
+  }
+  .nav_container{
+    padding: 8px 0px;
+    gap: 2px;
+  }
+  /* .upload-icon-nav,.myLibrary{
+    display: flex;
+  } */
+}
+@media screen and (max-width:500px) {
+
+  .documents {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home {
+    display: flex;
+    flex-direction: column;
+
+  }
+  .nav_container fa-icon{
+    display: block;
+    font-size: 20px !important;
+  }
+  .nav_container{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white !important;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    padding: 12px 0px;
+    border-top: 1px solid whitesmoke;
+
+
+  }
+  .nav_item{
+    color: dimgray !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px !important;
+    gap: 5px;
+  }
+  .nav_item span{
+    display: block;
+    font-size: 9px !important;
+    text-wrap: nowrap;
+  }
+
+  .nav_item:hover{
+    color: #04ad42 !important;
+
+  }
+}

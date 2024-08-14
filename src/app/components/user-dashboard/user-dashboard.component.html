@@ -1,0 +1,296 @@
+<div class="container">
+    <div class="h-container">
+        <div class="h-menu-bars-container" (click)="toggleSideMenu($event)">
+            <fa-icon [icon]="faBars"></fa-icon>
+        </div>
+        <div class="h-site-name-container" routerLink="/home">
+            <!-- <img src="assets/icon.png" alt="" class="logo"> -->
+            <!-- <span class="h-tut">Tut</span>
+            <span class="h-docs">docs</span> -->
+            <span>TUTDOCS</span>
+        </div>
+        <nav>
+            <div class="h-site-search-container" [ngClass]="{ 'active': isSearchBarOpen }">
+                <input #searchInput type="text" [(ngModel)]="searchQuery" (keyup.enter)="performSearch()"
+                    placeholder="Search for courses, documents, institutions">
+                <fa-icon [icon]="search" class="h-search" (click)="performSearch()"></fa-icon>
+            </div>
+            <div class="h-search-bar-icon-container" (click)="toggleSearchBar($event)">
+                <fa-icon [icon]="search"></fa-icon>
+            </div>
+            <div class="h-notification-icon-container" routerLink="/notifications">
+                <fa-icon [icon]="faBell"></fa-icon>
+                <div class="no_of_notification" *ngIf="noOfunViewednotification > 0">{{ noOfunViewednotification }}
+                </div>
+            </div>
+            <div class="h-nav-container">
+                <a routerLink="/home" class="h-nav-item h-home" routerLink="/home" routerLinkActive="h_nav_activer"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="faHome"></fa-icon>
+                    <span>Home</span>
+                </a>
+                <a href="" class="h-nav-item university" routerLink="/universities" routerLinkActive="h_nav_activer"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="faUniversity"></fa-icon>
+                    <span>University</span>
+                </a>
+
+                <a href="" class="h-nav-item high-school" routerLink="/schools" routerLinkActive="h_nav_activer"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="faSchool"></fa-icon>
+                    <span>High School</span>
+                </a>
+                <a class="h-nav-item myLibrary" routerLink="/library" routerLinkActive="h_nav_activer"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="faListCheck"></fa-icon>
+                    <span>Library</span>
+                </a>
+                <a (click)="uploadDocument()" class="h-nav-item upload-icon-nav" routerLinkActive="h_nav_activer"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="faCloudUpload"></fa-icon>
+                    <span>Upload</span>
+                </a>
+                <a routerLink="/notifications" class="notification" routerLinkActive="h_nav_activer"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="faBell"></fa-icon>
+                    <div class="no_of_notification" *ngIf="noOfunViewednotification > 0">{{ noOfunViewednotification }}
+                    </div>
+
+                    <!-- <span>Notifications</span> -->
+                </a>
+            </div>
+            <div class="h-sign-in_container">
+                <button *ngIf="!isAuthenticated" class="h-sign-in-btn" (click)="gotoLogin()">Sign in</button>
+                <div *ngIf="isAuthenticated && userData?.profile_picture" class="h-drop-down-container"
+                    #optionContainer>
+                    <div class="h-profile" (click)="toggleOptionContainer($event)">
+                        <img [src]="userData.profile_picture" alt="" class="h-user-profile">
+                    </div>
+                    <div class="h-option-container" [ngClass]="{ 'h-show': isOptionContainerOpen }">
+                        <div class="h-triangle_design"></div>
+                        <div class="H-user_profile_container" (click)="profileClick(userData.user_id)"
+                            (click)="onRouterLinkClick()">
+                            <img [src]="userData.profile_picture" alt="" class="H-profile_picture">
+                            <div class="H-profile_info">
+                                <span class="H-user_name">{{userData.name}}</span>
+                                <span class="H-user_email">{{userData.username}}</span>
+                            </div>
+                        </div>
+                        <div class="h-option_item" (click)="onRouterLinkClick()" routerLink="/home">
+                            <fa-icon [icon]="faHome"></fa-icon>
+                            <span class="h-user-home">Home</span>
+                        </div>
+                        <div class="h-option_item" routerLink="/upload">
+                            <fa-icon [icon]="faCloudUpload"></fa-icon>
+                            <span class="h-upload">Upload Files</span>
+                        </div>
+                        <div class="h-option_item" (click)="onRouterLinkClick()"
+                            (click)="profileClick(userData.user_id)">
+                            <fa-icon [icon]="faAddressCard"></fa-icon>
+                            <span class="h-profile">View Profile</span>
+                        </div>
+                        <div class="h-option_item" (click)="onRouterLinkClick()" routerLink="setting">
+                            <fa-icon [icon]="faGear"></fa-icon>
+                            <span class="h-setting">Edit Profile</span>
+                        </div>
+
+
+                        <div class="h-sign-out-container">
+                            <div class="h-option_item_signOut " (click)="onRouterLinkClick()" (click)="logOut()">
+                                <span class="h-signout">Sign Out</span>
+                                <fa-icon [icon]="logoutIcon"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="main-container">
+        <div class="sidebar-container" [ngClass]="{'open': isSidebarOpen}">
+            <div class="user-profile-container" (click)="onRouterLinkClick()" (click)="profileClick(userData.user_id)">
+                <div *ngIf="userData">
+                    <img *ngIf="userData.profile_picture" [src]="userData.profile_picture" class="user-profile-pic"
+                        alt="">
+                    <!-- <img *ngIf="!userData.picture" [src]="'path_to_default_image.jpg'" class="default-profile-pic"> -->
+                </div>
+                <div class="user-details">
+                    <span class="user-name">{{userData.name}}</span>
+                    <span class="user-institution">
+                        <!-- <fa-icon [icon]="university"></fa-icon> -->
+                        <span class="institution_name">{{userData.study_at}}</span></span>
+                </div>
+            </div>
+            <div class="user-uploads-container">
+                <div class="reiews-and-uploads">
+                    <span class="count-number">{{totalFiles}}</span>
+                    <span class="upload-text">Uploads</span>
+                </div>
+                <div class="reiews-and-uploads">
+                    <span class="count-number">{{totalLikes}}</span>
+                    <span class="upload-text">Likes</span>
+                </div>
+                <div class="reiews-and-uploads">
+                    <span class="count-number">{{totalDownloads}}</span>
+                    <span class="upload-text">Downloads</span>
+                </div>
+            </div>
+            <div class="upload-btn-container" (click)="uploadDocument()">
+                <fa-icon [icon]="uploadIcon"></fa-icon>
+                <span>Upload Document</span>
+            </div>
+            <div class="side-bar-nav-container">
+                <div class="nav-item home" (click)="onRouterLinkClick()" routerLink="home" routerLinkActive="active_nav"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="faHome"></fa-icon>
+                    <span>Home</span>
+                </div>
+                <div class="nav-item myLibrary" routerLink="/library" (click)="onRouterLinkClick()"
+                    routerLinkActive="active_nav" [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon [icon]="faListCheck"></fa-icon>
+                    <span>My Library</span>
+                </div>
+            </div>
+
+            <div class="my_library_container">
+                <div class="my_library_title">
+                    <span>My Library</span>
+                </div>
+                <div class="library_item-container courses" (click)="toggleContent('courses')">
+                    <div class="library_item">
+                        <fa-icon [icon]="folder"></fa-icon>
+                        <span>Courses</span>
+                        <fa-icon [icon]="showContent === 'courses' ? dropUpArrow : dropDownArrow"
+                            class="dropDownArrow"></fa-icon>
+                    </div>
+                    <div *ngIf="showContent === 'courses'" class="content">
+                        <div class="study_list_container" *ngIf="isFollowedCourse">
+                            <div class="added_course_container" *ngFor="let item of followedCoursesList">
+                                <div class="folder_icon_container">
+                                    <fa-icon [icon]="folder"></fa-icon>
+                                </div>
+                                <div class="course_info_container"
+                                    (click)="openCourse(item.course_name,item.course_code)">
+                                    <span class="course_name">{{item.course_name}}</span>
+                                    <span class="course_code">{{item.course_code}} | {{item.no_of_files}}
+                                        Documents</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="no_study_list_found_container" *ngIf="!isFollowedCourse ">
+                            <span>You don't add any courses yet.</span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="library_item-container study_List" (click)="toggleContent('study_List')">
+                    <div class="library_item ">
+                        <fa-icon [icon]="faBookmark"></fa-icon>
+                        <span>Study List</span>
+                        <fa-icon [icon]="showContent === 'study_List' ? dropUpArrow : dropDownArrow"
+                            class="dropDownArrow"></fa-icon>
+                    </div>
+                    <div *ngIf="showContent === 'study_List'" class="content">
+                        <div class="study_list_container" *ngIf="isBookmarkAdded">
+                            <div *ngFor="let item of bookMarkedList" class="study_list_item">
+                                <div class="study_list_thumnail_container" (click)="viewDocument(item.file_key)">
+                                    <img src="{{item.thumnail_url}}" alt="" class="study_list_thunail_img">
+                                </div>
+                                <div class="study_list_file_info">
+                                    <span class="file_name" (click)="viewDocument(item.file_key)">{{ item.file_title
+                                        }}</span>
+                                    <span class="file_course" (click)="openCourse(item.course_name,item.course_code)">{{
+                                        item.course_name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="no_study_list_found_container" *ngIf="!isBookmarkAdded">
+                            <span>You don't add any study list yet.</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="library_item-container books" (click)="toggleContent('books')">
+                    <div class="library_item ">
+                        <fa-icon [icon]="faHistory"></fa-icon>
+                        <span>Recently Viewed</span>
+                        <fa-icon [icon]="showContent === 'books' ? dropUpArrow : dropDownArrow"
+                            class="dropDownArrow"></fa-icon>
+                    </div>
+                    <div *ngIf="showContent === 'books'" class="content">
+                        <div class="study_list_container" *ngIf="isRecentlyViewed">
+                            <div *ngFor="let item of recentlyViewedList" class="study_list_item">
+                                <div class="study_list_thumnail_container" (click)="viewDocument(item.file_key)">
+                                    <img src="{{item.thumnail_url}}" alt="" class="study_list_thunail_img">
+                                </div>
+                                <div class="study_list_file_info">
+                                    <span class="file_name" (click)="viewDocument(item.file_key)">{{ item.file_title
+                                        }}</span>
+                                    <span class="file_course" (click)="openCourse(item.course_name,item.course_code)">{{
+                                        item.course_name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="no_study_list_found_container" *ngIf="!isRecentlyViewed">
+                            <span>You don't view any document yet.</span>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="feedback_and_help_container">
+                <div class="fh_item">
+                    <fa-icon [icon]="faQuestionCircle"></fa-icon>
+                    <span class="help">Help</span>
+                </div>
+                <div class="fh_item">
+                    <fa-icon [icon]="faComments"></fa-icon>
+                    <span class="feedback">Feedback</span>
+                </div>
+            </div> -->
+            <!-- <div class="privacy_policy_container">
+                <div>
+                    <span class="term-link" routerLink="/terms">Terms of Use</span>
+                    <span>  |  </span>
+                    <span class="term-link" routerLink="/privacy-policy">Privacy policy</span>
+                </div>
+                <div class="copy-right-text-container">
+                    <span>Copyrights © {{currentYear}} Tutdocs. All rights reserved.</span>
+                </div>
+            </div> -->
+            <br><br><br>
+        </div>
+        <div class="main">
+            <router-outlet></router-outlet>
+            <!-- <br><br><br><br><br> -->
+        </div>
+    </div>
+    <!-- <div class="footer-container">
+        <app-footer></app-footer>
+    </div> -->
+
+</div>
+
+<ng-container *ngIf="displayLogin">
+    <!-- <app-popup-login></app-popup-login> -->
+    <div *ngIf="displayLogin" class="overlay" (click)="closeLogin()"></div> <!-- Background overlay -->
+    <div *ngIf="displayLogin" class="login-container">
+        <span class="close-button" (click)="closeLogin()"> <fa-icon [icon]="faTimes"></fa-icon></span>
+        <h2>Login to continue</h2>
+        <span>Login to get best study materials</span>
+        <div class="buttons_container">
+            <div class="continue_with_email_container">
+                <button (click)="login()">Login</button>
+                <button (click)="register()">Register</button>
+            </div>
+            <button class="login_with_google_btn" (click)="loginWithGoogle()"><img src="assets/icon/google-icon.png"
+                    alt="" class="google_icon"> Continue with Google</button>
+        </div>
+        <div class="privacy-note-container">
+            <span>By continue, you agree to <span class="term-link" routerLink="/terms">Terms of Use</span> and <span
+                    class="term-link" routerLink="/privacy-policy">Privacy policy</span>.</span>
+        </div>
+    </div>
+</ng-container>

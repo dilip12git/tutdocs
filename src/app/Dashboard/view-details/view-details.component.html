@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="file_detail_container" *ngIf="fileDetails">
+        <div class="title_container">
+            <div class="icon_container">
+                <fa-icon [icon]="faInfo"></fa-icon>
+            </div>
+            <span>Document details</span>
+        </div>
+
+        <div class="details" *ngIf="fileDetails">
+            <div class="thumbnail_container">
+                <img [src]="fileDetails.thumnail_url" alt="" class="img">
+            </div>
+            <div class="file_info">
+                <div class="text_box">
+                    <span class="title">Title:</span>
+                    <span class="file_title"> {{fileDetails.file_title}}</span>
+                </div>
+                <div class="text_box">
+                    <span class="title">File Name:</span>
+                    <span class="text">{{fileDetails.file_name}}</span>
+                </div>
+                <div class="text_box">
+                    <span class="title">File Size:</span>
+                    <span class="text"> {{fileDetails.file_size}}</span>
+
+                </div>
+                <div class="text_box">
+                    <span class="title">File type:</span>
+                    <span class="text"> {{fileDetails.file_type}}</span>
+
+                </div>
+
+                <div class="text_box">
+                    <span class="title">Course Name:</span>
+                    <span class="text"> {{fileDetails.course_name}}</span>
+
+                </div>
+
+                <div class="text_box">
+                    <span class="title">Course Code:</span>
+                    <span class="text"> {{fileDetails.course_code}}</span>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="educ_details" *ngIf="fileDetails">
+            <div class="text-box">
+                <span class="title">File Descriptions:</span>
+                <span class="text"> {{fileDetails.file_description}}</span>
+            </div>
+
+            <div class="text-box">
+                <span class="title">Upload By:</span>
+                <span class="text"> {{fileDetails.upload_by}}</span>
+            </div>
+
+
+
+            <div class="text-box">
+                <span class="title">Upload date:</span>
+                <span class="text"> {{fileDetails.upload_date}}</span>
+            </div>
+            <div class="text-box">
+                <span class="title">Institution:</span>
+                <span class="text"> {{fileDetails.institute_name}}</span>
+            </div>
+        </div>
+        <div class="review_details" *ngIf="fileDetails">
+            <div class="text-box">
+                <span class="title">Likes:</span>
+                <span class="text"> {{fileDetails.like_count}}</span>
+            </div>
+            <div class="text-box">
+                <span class="title">Views:</span>
+                <span class="text"> {{fileDetails.view_count}}</span>
+            </div>
+            <div class="text-box">
+                <span class="title">Downloads:</span>
+                <span class="text"> {{fileDetails.download_count}}</span>
+            </div>
+        </div>
+
+        <div class="buttons_container"  *ngIf="fileDetails">
+            <button (click)="viewDocument(fileDetails.file_key)"><fa-icon [icon]="faFileAlt"></fa-icon>Open file</button>
+            <button (click)="editFile(fileDetails.file_key)"> <fa-icon [icon]="faFileEdit"></fa-icon>Edit file</button>
+        </div>
+    </div>
+</div>

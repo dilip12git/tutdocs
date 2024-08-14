@@ -1,0 +1,153 @@
+<div class="container">
+    <div class="search_and_university_main_title_container">
+        <div class="university_title_container">
+            <span class="university_name">{{intitutionName}}</span>
+            <!-- <span class="from_country">{{}}</span> -->
+        </div>
+        <div class="searchBar_container">
+            <div class="search_box_container">
+                <input type="text" class="search_box" placeholder="Search for courses..." name="searchQuery"
+                    [(ngModel)]="searchCourseQuery" (keyup)="performCourseSearch()" autocomplete="off">
+                <div class="spinner"><mat-spinner diameter="15" color="custom-green" *ngIf="isSearching"></mat-spinner>
+                </div>
+                <fa-icon [icon]="faSearch" class="search-icon"></fa-icon>
+            </div>
+            <div class="search-results" *ngIf="searchCourseResults.length > 0">
+                <div class="results_wrapper_container">
+                    <div class="results_wrapper" *ngFor="let result of searchCourseResults"
+                        (click)="selectCourseResult(result)">
+                        <fa-icon [icon]="faFolder"></fa-icon>
+                        <span class="search_course_name" (click)="openCourse(result.course_name,result.course_code)" >{{ result.course_name }} -
+                            {{result.course_code}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="route_map_container">
+        <span class="university_title" routerLink="/universities">Institutions</span>
+        <fa-icon [icon]="faAngleRight"></fa-icon>
+        <span class="univerisity_name_map">{{intitutionName}}</span>
+    </div>
+    <div *ngIf="isInstitutionData else showNoDataFound">
+    <div class="wrapper">
+        <div *ngIf="isPopularPost; else loadPopularPost">
+            <div class="skeleton-container">
+                <div class="skeleton-card card-title"></div>
+                <div class="card-container">
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #loadPopularPost>
+        <div class="popular_documents_wrapper_container">
+            <div class="popular_document_title_container">
+                <span class="popular_document_title">Popular documents</span>
+            </div>
+            <div class="popular_documents_wrapper">
+                <div class="popular_documents"  *ngFor=" let popularDocs of popularDocsDetails">
+                    <div class="popular_documents_image_container"  (click)="viewDocument(popularDocs.file_key)">
+                        <img [src]="popularDocs.thumnail_url" alt="" class="popular_documents_thumbnails">
+                    </div>
+                    <div class="popular_documents_info">
+                        <span class="popular_documents_title"  (click)="viewDocument(popularDocs.file_key)">{{popularDocs.file_title}}</span>
+                        <span class="popular_documents_course" (click)="openCourse(popularDocs.course_name,popularDocs.course_code)">{{popularDocs.course_name}} ({{popularDocs.course_code}})</span>
+                        <!-- <span class="popular_documents_views"><fa-icon [icon]="faEye"></fa-icon> {{popularDocs.view_count}}</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        </ng-template>
+    </div>
+    <div class="wrapper">
+        <div *ngIf="isRecentPost; else loadRecentPost">
+            <div class="skeleton-container">
+                <div class="skeleton-card card-title"></div>
+                <div class="card-container">
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #loadRecentPost>
+        <div class="popular_documents_wrapper_container">
+            <div class="popular_document_title_container">
+                <span class="popular_document_title">Recent documents</span>
+            </div>
+            <div class="popular_documents_wrapper">
+                <div class="popular_documents"  *ngFor=" let recentDocs of recentDocsDetails">
+                    <div class="popular_documents_image_container" (click)="viewDocument(recentDocs.file_key)">
+                        <img [src]="recentDocs.thumnail_url" alt="" class="popular_documents_thumbnails">
+                    </div>
+                    <div class="popular_documents_info">
+                        <span class="popular_documents_title" (click)="viewDocument(recentDocs.file_key)">{{recentDocs.file_title}}</span>
+                        <span class="popular_documents_course" (click)="openCourse(recentDocs.course_name,recentDocs.course_code)">{{recentDocs.course_name}} ({{recentDocs.course_code}})</span>
+                        <!-- <span class="popular_documents_views"><fa-icon [icon]="faEye"></fa-icon> {{recentDocs.view_count}}</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        </ng-template>
+    </div>
+
+    <div class="wrapper">
+        <div class="courses_container">
+            <div class="course_title_container">
+                <span class="course_title">Popular Courses</span>
+            </div>
+            <div class="course_details_container">
+            <div class="course_details" *ngFor="let course of courseDetails">
+                <div class="course_icon_container" (click)="openCourse(course.course_name,course.course_code)">
+                    <fa-icon [icon]="faFolder" class="course-icon"></fa-icon>
+                </div>
+            <div class="course_info" (click)="openCourse(course.course_name,course.course_code)">
+                <span class="popular_post_course_name">{{course.course_name}}</span>
+                <span class="popular_post_course_count">{{course.course_code}} | {{course.no_of_files}} Documents</span>
+            </div>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+
+
+    <div class="wrapper">
+        <div class="reviews_container">
+            <div class="reivews_title_container">
+                <span class="reviews_title">Reviews</span>
+            </div>
+          <div class="reviews_details">
+            <table  [cellPadding]="10" [cellSpacing]="0">
+            <tr>
+                <td>Documents</td>
+                <td>Views</td>
+                <td>Likes</td>
+                <td>Downloads</td>
+            </tr>
+            <tr>
+                <td>{{rTotalFiles}}</td>
+                <td>{{rTotalViews}}</td>
+                <td>{{rTotalLikes}}</td>
+                <td>{{rTotalDownload}}</td>
+                
+            </tr>
+            </table>
+          </div>
+        </div>
+        
+    </div>
+</div>
+    <ng-template #showNoDataFound>
+    <div class="No_documents_found_wrapper" >
+        <span>No Documents found !</span>
+    </div>
+</ng-template>
+</div>

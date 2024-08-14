@@ -1,0 +1,222 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    /* background:#f6f7fb; */
+    overflow-y: scroll;
+    margin: auto;
+    /* position:fixed;
+    height: 100%;
+    width: 100%; */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+.site-logo{
+    width: 50px;
+    height: 50px;
+}
+.title_container{
+    font-size: 30px;
+    font-weight: 600;
+    background-image: linear-gradient(45deg, #04ad42, #3092FA);
+    background-clip: text;
+    color: transparent;
+    margin-top:50px;
+    font-family: cosmic octo;
+}
+.title_Desc{
+    margin-bottom: 20px;
+    color: dimgray;
+}
+.form_container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.input-box{
+    padding: 12px 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: transparent;
+    outline: none;
+    width: 300px;
+    font-size: medium;
+}
+.input-box:hover{
+border: 1px solid #04ad42;
+}
+.submitBTN{
+    background-image: linear-gradient(45deg, #04ad42, #3092FA);
+    color: white;
+    cursor: pointer;
+    font-size: medium;
+    border: none;
+    border-radius: 5px;    
+    font-weight: 600;
+    padding: 12px 8px;
+    margin-top: 0px;
+    
+}
+.submitBTN:hover{
+   opacity: .9;
+}
+.error_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: small; 
+    color: red;
+    cursor: pointer;
+}
+
+.dont_have_account_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: smaller;
+}
+.reg_text{
+color: #3092FA;
+cursor: pointer;
+}
+.reg_text:hover{
+    text-decoration: underline;
+}
+.or_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 5px;
+    color: rgb(219, 218, 218);
+}
+.eye-icon{
+    position: absolute;
+   margin-left: -40px;
+    font-size: small;
+    color: dimgray;
+    padding: 12px 16px;
+    cursor: pointer;
+    /* z-index: 1; */
+}
+.line{
+    background:  rgb(219, 218, 218);
+    height: 1px;
+    width: 140px;
+}
+.google_login_container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    flex-wrap: nowrap;
+    padding: 12px 5px;
+    font-size: medium;
+    cursor: pointer;
+}
+.google_login_container:hover{
+    background: whitesmoke;
+}
+.google_icon{
+    width: 25px;
+    height: 25px;
+}
+.privacy-note-container {
+    padding: 16px 12px;
+    margin-top: 0px;
+    font-size: 14px;
+    font-size: dimgray;
+    text-align: center;
+  }
+  .term-link{
+    color: #3092FA;
+    cursor: pointer;
+  }
+  .term-link:hover{
+    color: #3092FA;
+    text-decoration: underline;
+  }
+  .back_btn_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid whitesmoke;
+    border-radius: 50%;
+    cursor: pointer;
+    position: fixed;
+    color: dimgray;
+    left: 10px;
+    top: 20px;
+  }
+  .back_btn_container:hover{
+    background: whitesmoke;
+  }
+
+.loading-container{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    
+}
+.show_mail_sent_message{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ 
+    
+
+}
+._mail_container{
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 500px;
+    margin-top: 50px;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #04ad42;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .btn:hover {
+    background-color: #09ad46;
+  }
+  .loading-container{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    
+}

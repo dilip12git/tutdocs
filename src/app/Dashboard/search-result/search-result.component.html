@@ -1,0 +1,318 @@
+<div class="container">
+    <div class="search_skeleton_container" *ngIf="isloadingSearch;else showSearchResults">
+      <div class="tab_bar-skeletoncontainer">
+        <div class="tab-item-skeleton-card"></div>
+        <div class="tab-item-skeleton-card" ></div>
+        <div class="tab-item-skeleton-card"></div>
+        <div class="tab-item-skeleton-card"></div>
+        </div>
+        <div class="search_results_for_skeleton"></div>
+        <div class="institute_skeleton_container">
+          <div class="institute_skeleton_item"></div>
+          <div class="institute_skeleton_item"></div>
+          <div class="institute_skeleton_item"></div>
+        </div>
+
+        <div class="user_skeleton_container">
+          <div class="user_skeleton_item"></div>
+          <div class="user_skeleton_item"></div>
+          <div class="user_skeleton_item"></div>
+          <div class="user_skeleton_item"></div>
+        </div>
+
+        <div class="post_skeleton_container">
+          <div class="post_skeleton_item"></div>
+          <div class="post_skeleton_item"></div>
+          <div class="post_skeleton_item"></div>
+          <div class="post_skeleton_item"></div>
+          <div class="post_skeleton_item"></div>
+          <div class="post_skeleton_item"></div>
+       
+        </div>
+    </div>
+ <ng-template #showSearchResults>
+  <div class="tab_bar-container">
+    <div class="tab-item" (click)="openTab('all')" [class.active]="selectedTab === 'all'">All</div>
+    <div class="tab-item" (click)="openTab('post')" [class.active]="selectedTab === 'post'">Post</div>
+    <div class="tab-item" (click)="openTab('people')" [class.active]="selectedTab === 'people'">People</div>
+    <div class="tab-item" (click)="openTab('instutions')" [class.active]="selectedTab === 'instutions'">Institutions
+    </div>
+  </div>
+
+ <div class="search_results_for_container">
+  <span>Search Results for <b>"{{searchQuery}}"</b></span>
+ </div>
+  <div class="tab_container" [class.active-container]="selectedTab === 'all'">
+    <div
+      *ngIf="searchResults && searchResults.length > 0 && searchResults[0]?.data && searchResults[0]?.data.length > 0">
+      <div *ngFor="let result of searchResults" class="overAll_search_container">
+        <div
+          *ngIf="institutionSearchResults && institutionSearchResults.length > 0 && institutionSearchResults[0]?.data && institutionSearchResults[0]?.data.length > 0">
+          <div *ngFor="let institute of institutionSearchResults" class="overAll_institution_content_container">
+            <div class="over-all_institute_info_container" *ngIf="institute.data && institute.data.length > 0">
+              <div class="overAll_institution_type">
+                <fa-icon [icon]="faUniversity" class="over_all_institute-icon"></fa-icon>
+                <span class="institue_type">{{ institute.data[0]?.institution_type }} </span>
+              </div>
+              <div class="overAll_intitute_name" (click)="gotoInstitutions(institute.data[0]?.institution_name)">
+                <span>{{ institute.data[0]?.institution_name }}</span>
+              </div>
+              <div class="over_all_institute__country">
+                <span class="institue_country">{{ institute.data[0]?.country }}</span>
+              </div>
+
+            </div>
+            <div *ngFor="let item of institute.data?.slice(1)">
+              <div class="over-all_institute_info_container" *ngIf="item">
+                <div class="overAll_institution_type">
+                  <fa-icon [icon]="faUniversity" class="over_all_institute-icon"></fa-icon>
+                  <span class="institue_type">{{ item?.institution_type }}</span>
+                </div>
+                <div class="overAll_intitute_name" (click)="gotoInstitutions(item?.institution_name)">
+                  <span>{{item?.institution_name }}</span>
+                </div>
+                <div class="over_all_institute__country">
+                  <span class="institue_country">{{item?.country }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="institutionSearchResults && institutionSearchResults.length > 0 && (!institutionSearchResults[0]?.data || institutionSearchResults[0]?.data.length === 0)"
+          class="search_not_found_container">
+        </div>
+        <div class="searched_users_container">
+          <div
+            *ngIf="userNameSearchResults && userNameSearchResults.length > 0 && userNameSearchResults[0]?.data && userNameSearchResults[0]?.data.length > 0">
+            <div *ngFor="let users of userNameSearchResults" class="overAll_search_user_content_container">
+              <div class="over_all_user_info_container" *ngIf="users.data && users.data.length > 0">
+                <img [src]="users.data[0]?.profile_picture" (click)="openProfile(users.data[0]?.user_id);"alt="" class="profile_picture">
+                <div class="user_info">
+                  <span class="user_name" (click)="openProfile(users.data[0]?.user_id);">{{ users.data[0]?.name
+                    }}</span>
+                  <span class="user_institue" (click)="gotoInstitutions( users.data[0]?.study_at)">{{ users.data[0]?.study_at
+                    }}</span>
+                </div>
+              </div>
+              <div *ngFor="let item of users.data?.slice(1)">
+                <div class="over_all_user_info_container" *ngIf="item">
+                  <img [src]="item?.profile_picture"(click)="openProfile(item?.user_id);" alt="" class="profile_picture">
+                  <div class="user_info">
+                    <span class="user_name" (click)="openProfile(item?.user_id);">{{item?.name }}</span>
+                    <span class="user_institue" (click)="gotoInstitutions(item?.study_at)">{{ item?.study_at }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="userNameSearchResults && userNameSearchResults.length > 0 && (!userNameSearchResults[0]?.data || userNameSearchResults[0]?.data.length === 0)"
+            class="search_not_found_container">
+          </div>
+        </div>
+      </div>
+      <div
+      *ngIf="postSearchResault && postSearchResault.length > 0 && postSearchResault[0]?.data && postSearchResault[0]?.data.length > 0">
+      <div *ngFor="let postData of postSearchResault" class="search_post_container">
+        <div class="post_container">
+          <div class="image-container" (click)="viewDocument(postData.data[0]?.file_key);">
+            <img [src]="postData.data[0]?.thumnail_url" alt="" class="doc_imgs">
+        </div>
+          <div class="file_info">
+            <span class="file_title" (click)="viewDocument(postData.data[0]?.file_key);">{{ postData.data[0]?.file_title }}</span>
+            <span class="file_course" (click)="openCourse(postData.data[0]?.course_name,postData.data[0]?.course_code)"><fa-icon [icon]="faFolder"></fa-icon> {{ postData.data[0]?.course_name }}-{{
+              postData.data[0]?.course_code }}</span>
+            <span class="file_posted_institution" (click)="gotoInstitutions( postData.data[0]?.institute_name )"><fa-icon [icon]="faUniversity"></fa-icon> {{
+              postData.data[0]?.institute_name }}</span>
+          </div>
+          <div class="posted_by_and_posted_at">
+            <span class="post_by" (click)="openProfile(postData.data[0]?.user_id);">{{ postData.data[0]?.upload_by }}</span>
+            <span class="post_at">{{ postData.data[0]?.upload_date }}</span>
+          </div>
+        </div>
+        <div *ngFor="let item of postData.data.slice(1)">
+          <div class="post_container">
+            <div class="image-container" (click)="viewDocument(item?.file_key);">
+              <img [src]="item?.thumnail_url" alt="" class="doc_imgs">
+          </div>
+
+            <div class="file_info">
+              <span class="file_title" (click)="viewDocument(item?.file_key);">{{ item?.file_title }}</span>
+              <span class="file_course" (click)="openCourse(item?.course_name,item?.course_code)"><fa-icon [icon]="faFolder"></fa-icon>{{ item?.course_name }}-{{
+                item?.course_code
+                }}</span>
+              <span class="file_posted_institution" (click)="gotoInstitutions(item?.institute_name)"><fa-icon [icon]="faUniversity"></fa-icon> {{
+                item?.institute_name
+                }}</span>
+            </div>
+            <div class="posted_by_and_posted_at">
+              <span class="post_by" (click)="openProfile(item?.user_id);">{{ item?.upload_by }}</span>
+              <span class="post_at">{{ item?.upload_date }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="postSearchResault && postSearchResault.length > 0 && (!postSearchResault[0]?.data || postSearchResault[0]?.data.length === 0)"
+      class="search_not_found_container">
+     
+    </div>
+    </div>
+    <div
+      *ngIf="searchResults && searchResults.length > 0 && (!searchResults[0]?.data || searchResults[0]?.data.length === 0)"
+      class="search_not_found_container">
+      <img src="assets/icon/cat.png" alt="" class="cat_picture">
+      <p>No results found on your search - <b>"{{searchQuery}}"</b></p>
+      <p>Suggestions:</p>
+      <ul>
+        <li>Make sure that all words are spelled correctly</li>
+        <li>Try different keywords</li>
+        <li>Remove any search filters you have set</li>
+        <li>If you are looking for a course, try searching by course code</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab_container" [class.active-container]="selectedTab === 'post'">
+    <div
+      *ngIf="postSearchResault && postSearchResault.length > 0 && postSearchResault[0]?.data && postSearchResault[0]?.data.length > 0">
+      <div *ngFor="let postData of postSearchResault" class="search_post_container">
+        <div class="post_container">
+          <div class="image-container" (click)="viewDocument(postData.data[0]?.file_key);">
+            <img [src]="postData.data[0]?.thumnail_url" alt="" class="doc_imgs">
+        </div>
+          <div class="file_info">
+            <span class="file_title"(click)="viewDocument(postData.data[0]?.file_key);">{{ postData.data[0]?.file_title }}</span>
+            <span class="file_course" (click)="openCourse(postData.data[0]?.course_name,postData.data[0]?.course_code)"><fa-icon [icon]="faFolder"></fa-icon> {{ postData.data[0]?.course_name }}-{{
+              postData.data[0]?.course_code }}</span>
+            <span class="file_posted_institution" (click)="gotoInstitutions(postData.data[0]?.institute_name)"><fa-icon [icon]="faUniversity"></fa-icon> {{
+              postData.data[0]?.institute_name }}</span>
+          </div>
+          <div class="posted_by_and_posted_at">
+            <span class="post_by" (click)="openProfile(postData.data[0]?.user_id);">{{ postData.data[0]?.upload_by }}</span>
+            <span class="post_at">{{ postData.data[0]?.upload_date }}</span>
+          </div>
+        </div>
+        <div *ngFor="let item of postData.data.slice(1)">
+          <div class="post_container">
+            <div class="image-container" (click)="viewDocument(item?.file_key);">
+              <img [src]="item?.thumnail_url" alt="" class="doc_imgs">
+          </div>
+
+            <div class="file_info">
+              <span class="file_title" (click)="viewDocument(item?.file_key);">{{ item?.file_title }}</span>
+              <span class="file_course" (click)="openCourse(item?.course_name,item?.course_code)"><fa-icon [icon]="faFolder"></fa-icon>{{ item?.course_name }}-{{
+                item?.course_code
+                }}</span>
+              <span class="file_posted_institution" (click)="gotoInstitutions( postData.data[0]?.institute_name)"><fa-icon [icon]="faUniversity"></fa-icon> {{
+                item?.institute_name
+                }}</span>
+            </div>
+            <div class="posted_by_and_posted_at">
+              <span class="post_by"(click)="openProfile(item?.user_id);">{{ item?.upload_by }}</span>
+              <span class="post_at">{{ item?.upload_date }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="postSearchResault && postSearchResault.length > 0 && (!postSearchResault[0]?.data || postSearchResault[0]?.data.length === 0)"
+      class="search_not_found_container">
+      <img src="assets/icon/cat.png" alt="" class="cat_picture">
+      <p>Your search - <b>"{{searchQuery}}"</b> - did not match any post.</p>
+      <p>Suggestions:</p>
+      <ul>
+        <li>Make sure that all words are spelled correctly</li>
+        <li>Try different keywords</li>
+        <li>Remove any search filters you have set</li>
+        <li>If you are looking for a course, try searching by course code</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab_container" [class.active-container]="selectedTab === 'people'">
+    <div
+      *ngIf="userNameSearchResults && userNameSearchResults.length > 0 && userNameSearchResults[0]?.data && userNameSearchResults[0]?.data.length > 0">
+      <div *ngFor="let users of userNameSearchResults" class="search_user_content-container">
+        <div class="user_info_container" *ngIf="users.data && users.data.length > 0">
+          <img [src]="users.data[0]?.profile_picture" alt="" class="profile_picture">
+          <div class="user_info">
+            <span class="user_name" (click)="openProfile(users.data[0]?.user_id);">{{ users.data[0]?.name }}</span>
+            <span class="user_institue" (click)="gotoInstitutions( users.data[0]?.study_at)"><fa-icon [icon]="faUniversity"></fa-icon> {{ users.data[0]?.study_at
+              }}</span>
+          </div>
+        </div>
+        <div *ngFor="let item of users.data?.slice(1)">
+          <div class="user_info_container" *ngIf="item">
+            <img [src]="item?.profile_picture" alt="" class="profile_picture">
+            <div class="user_info">
+              <span class="user_name" (click)="openProfile(item?.user_id);">{{item?.name }}</span>
+              <span class="user_institue" (click)="gotoInstitutions( users.data[0]?.study_at)"><fa-icon [icon]="faUniversity"></fa-icon> {{ item?.study_at }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="userNameSearchResults && userNameSearchResults.length > 0 && (!userNameSearchResults[0]?.data || userNameSearchResults[0]?.data.length === 0)"
+      class="search_not_found_container">
+      <img src="assets/icon/cat.png" alt="" class="cat_picture">
+      <p>Your search - <b>"{{searchQuery}}"</b> - did not match any people.</p>
+      <p>Suggestions:</p>
+      <ul>
+        <li>Make sure that all words are spelled correctly</li>
+        <li>Try different keywords</li>
+        <li>Remove any search filters you have set</li>
+        <li>If you are looking for a course, try searching by course code</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab_container" [class.active-container]="selectedTab === 'instutions'">
+    <div
+      *ngIf="institutionSearchResults && institutionSearchResults.length > 0 && institutionSearchResults[0]?.data && institutionSearchResults[0]?.data.length > 0">
+      <div *ngFor="let institute of institutionSearchResults" class="search_user_content-container">
+        <div class="institute_info_container" *ngIf="institute.data && institute.data.length > 0">
+          <div class="institute-icon-container">
+            <fa-icon [icon]="faUniversity" class="institute-icon"></fa-icon>
+          </div>
+          <div class="user_info" (click)="gotoInstitutions( institute.data[0]?.institution_name)">
+            <span class="user_name">{{ institute.data[0]?.institution_name }}</span>
+            <div class="institute_type_and_country">
+              <span class="institue_type">{{ institute.data[0]?.institution_type }} </span>
+              <span class="institue_country">{{ institute.data[0]?.country }}</span>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let item of institute.data?.slice(1)">
+          <div class="institute_info_container" *ngIf="institute.data && institute.data.length > 0">
+            <div class="institute-icon-container">
+            <fa-icon [icon]="faUniversity" class="institute-icon"></fa-icon>
+          </div>
+            <div class="user_info" (click)="gotoInstitutions( institute.data[0]?.institution_name)">
+              <span class="user_name">{{ item?.institution_name }}</span>
+              <div class="institute_type_and_country">
+                <span class="institue_type">{{item?.institution_type }} </span>
+                <span class="institue_country">{{ item?.country }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="institutionSearchResults && institutionSearchResults.length > 0 && (!institutionSearchResults[0]?.data || institutionSearchResults[0]?.data.length === 0)"
+      class="search_not_found_container">
+      <img src="assets/icon/cat.png" alt="" class="cat_picture">
+      <p>Your search - <b>"{{searchQuery}}"</b> - did not match any institutions.</p>
+      <p>Suggestions:</p>
+      <ul>
+        <li>Make sure that all words are spelled correctly</li>
+        <li>Try different keywords</li>
+        <li>Remove any search filters you have set</li>
+        <li>If you are looking for a course, try searching by course code</li>
+      </ul>
+    </div>
+  </div>
+</ng-template>
+</div>

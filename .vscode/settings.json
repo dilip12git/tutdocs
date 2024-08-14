@@ -1,0 +1,8 @@
+{
+    "codesnap.backgroundColor": "#ffffff",
+    "codesnap.boxShadow": " rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;",
+    "codesnap.transparentBackground": true,
+    "files.associations": {
+        "HELLO.C": "cpp"
+    }
+}

@@ -1,0 +1,304 @@
+<div class="container">
+    <div class="wrapper-container">
+        <div *ngIf="isInstitutionLoading; else contentLoaded">
+            <div class="skeleton-container">
+                <!-- <div class="skeleton-card card-title"></div> -->
+                <div class="card-container">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #contentLoaded>
+            <!-- <div class="title">
+                <div class="title_container">
+                    <div>
+                        Top Institutions
+                    </div>
+                    <div class="view_all_container" routerLink="/universities">
+                        <span>View all</span>
+                        <fa-icon [icon]="faAngleRight"></fa-icon>
+                    </div>
+
+                </div>
+            </div> -->
+            <div class="institute_wrapper">
+                <div class="institute_info_container" *ngFor="let institution of institutions">
+                    <div class="overAll_institution_type">
+                        <div class="all_institute_icon_container">
+                            <fa-icon [icon]="faUniversity" class="all_institute-icon"></fa-icon>
+                        </div>
+                        <span class="institue_type">{{ institution.institution_type }} </span>
+                        <div class="nf-cntr"><span>{{formatViewCount(institution.file_count)}}</span></div>
+                    </div>
+                    <div class="overAll_intitute_name" (click)="gotoInstitutions(institution.institution_name)">
+                        <span>{{ institution.institution_name }}</span>
+                    </div>
+                    <div class="over_all_institute__country">
+                        <span class="institue_country">{{ institution.country }}</span>
+                        <div class="visit_container" *ngIf="institution.institution_url">
+                            <a [href]="institution.institution_url" target="_blank"><fa-icon [icon]="faLink"
+                                    class="link-icon"></fa-icon></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    <div class="wrapper-container">
+        <div *ngIf="isUserInstitutePostLoading; else loadUserInstitutePost">
+            <div class="skeleton-container">
+                <div class="skeleton-card card-title"></div>
+                <div class="card-container">
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #loadUserInstitutePost>
+            <div *ngIf="ifUserSignIn">
+                <div class="title">
+                    <div class="title_container">
+                        <div>
+                            Documents from
+                            <span class="user_institute"
+                                (click)="gotoInstitutions(userInstitute)">{{userInstitute}}</span>
+                        </div>
+                        <div class="view_all_container" (click)="gotoInstitutions(userInstitute)">
+                            <span>View all</span>
+                            <fa-icon [icon]="faAngleRight"></fa-icon>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div *ngIf="showUserSpecificInstitutionsFile" class="post_wrapper-container">
+                    <div class="post_content" *ngFor="let usIP of userSpecificInstitutionPost">
+                        <div class="popular_documents_image_container" (click)="viewDocument(usIP.file_key)">
+                            <img [src]="usIP.thumnail_url" alt="" class="popular_documents_thumbnails">
+                        </div>
+                        <div class="save_button_and_user_name_container">
+                            <div>
+                                <span class="file_types">{{usIP.file_type}}</span>
+                            </div>
+                            <div class="univi_save_btn_container" (click)="toggleBookmark(usIP.file_key)">
+                                <ng-container *ngIf="usIP.isBookmarked">
+                                    <img src="http://localhost/tutdocs/assets/icon/bookmark-solid.png" class="bookmark-icon">
+                                </ng-container>
+                                <ng-container *ngIf="!usIP.isBookmarked">
+                                    <img src="http://localhost/tutdocs/assets/icon/bookmark-regular.png" class="bookmark-icon">
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="post_info_container">
+                            <div class="post_doc_name_container" (click)="viewDocument(usIP.file_key)">
+                                <span class="post_name">{{usIP.file_title}}</span>
+                            </div>
+                            <div class="show_title_container">
+                                <span class="post_course_container"
+                                    (click)="openCourse(usIP.course_name,usIP.course_code)">
+                                    <!-- <fa-icon [icon]="faFolder"
+                                        class="folder-icon"></fa-icon> -->
+                                    {{usIP.course_name}} ({{usIP.course_code}})</span>
+                                <!-- <span class="post_institue_name"><fa-icon [icon]="faUniversity"
+                                        class="univi-icon"></fa-icon> {{usIP.institute_name}}</span> -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="no-data-message" *ngIf="showNotDataFound">
+                    <span>Not found any post from <u>{{userInstitute}}</u></span>
+                    <button class="you_can_upload_now" routerLink="/upload">Upload Now</button>
+                </div>
+            </div>
+            <div class="no-data-message forAuth" *ngIf="shownotSignInMessage">
+                <!-- <fa-icon [icon]="faInfo" class="info-icon"></fa-icon> -->
+                <span>Login to get best study materials</span>
+                <button class="you_can_upload_now" (click)="addUnivi()">Login Now</button>
+            </div>
+        </ng-template>
+
+    </div>
+    <div class="wrapper-container">
+        <div *ngIf="isCoursesLoading; else loadCourses">
+            <div class="skeleton-container">
+                <div class="skeleton-card card-title"></div>
+                <div class="card-container">
+                    <div class="skeleton-popular_post_card_content"></div>
+                    <div class="skeleton-popular_post_card_content"></div>
+                    <div class="skeleton-popular_post_card_content"></div>
+                    <div class="skeleton-popular_post_card_content"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <ng-template #loadCourses>
+            <div class="title">
+                <div class="title_container">
+                    <div>
+                        Popular Courses
+                    </div>
+                    <div class="view_all_container" routerLink="/all-courses">
+                        <span>View all</span>
+                        <fa-icon [icon]="faAngleRight"></fa-icon>
+                    </div>
+
+                </div>
+            </div>
+            <div class="popular_course_container">
+                <div class="popular_post_card_content" *ngFor="let course of courseDetails">
+                    <div class="course_icon_container">
+                        <fa-icon [icon]="faFolder" class="course-icon"></fa-icon>
+                    </div>
+                    <div class="popular_post_info_container"
+                        (click)="openCourse(course.course_name,course.course_code)">
+                        <span class="popular_post_course_name">{{course.course_name}}</span>
+                        <!-- <span class="popular_post_course_code"></span> -->
+                        <span class="popular_post_course_count">{{course.course_code}} | {{course.no_of_files}}
+                            Documents</span>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    <div class="wrapper-container">
+        <div *ngIf="isUserDocumentLoading; else loadDocumentInstitutePost">
+            <div class="skeleton-container">
+                <div class=" skeleton-card card-title"></div>
+                <div class="skeleton-card-document"></div>
+                <div class="skeleton-card-document"></div>
+                <div class="skeleton-card-document"></div>
+                <div class="skeleton-card-document"></div>
+                <div class="skeleton-card-document"></div>
+            </div>
+        </div>
+
+        <ng-template #loadDocumentInstitutePost>
+            <div class="sort-title">
+                <span>Sort by</span>
+                <div class="select_sort_by-container">
+                    <div class="sort_by" (click)="toggleDropdown()">
+                        <span class="selected">{{ selectedOption }}</span>
+                        <fa-icon [icon]="faAngleDown"></fa-icon>
+                    </div>
+                    <div *ngIf="showDropdown" class="sort_by_option_container">
+                        <span (click)="selectOption('Most Recent Post')" class="select_option"><fa-icon
+                                [icon]="faHistory"></fa-icon><span>Most Recent Post</span></span>
+                        <span (click)="selectOption('Most Relevant Post')" class="select_option"><fa-icon
+                                [icon]="faHistory"></fa-icon><span>Most Relevant Post</span></span>
+                        <span (click)="selectOption('Most Viewed Post')" class="select_option"><fa-icon
+                                [icon]="faHistory"></fa-icon><span>Most Viewed Post</span></span>
+                        <!-- Add more options as needed -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="documents">
+                <div class="documents_wrapper" *ngFor="let document of docData">
+                    <div class="image-container" (click)="viewDocument(document.file_key)">
+                        <img [src]="document.thumnail_url" alt="" class="doc_imgs">
+                    </div>
+                    <div class="nwinf-lkcntr">
+                        <div class="dc-re-cntr">
+                            <div class="document_info_container">
+                                <div class="doc_name_container">
+                                    <!-- <div class="file_name_and_type_container"> -->
+                                    <span class="doc_name"
+                                        (click)="viewDocument(document.file_key)">{{document.file_title}}</span>
+                                    <span class="file_type">{{document.file_type}}</span>
+
+                                </div>
+                                <div class="course_and_institution_container">
+                                    <div class="course_container">
+                                        <fa-icon [icon]="faFolder" class="folder-icon"></fa-icon>
+                                        <span
+                                            (click)="openCourse(document.course_name,document.course_code)">{{document.course_name}}({{document.course_code}})</span>
+                                    </div>
+                                    <div class="intitutions_container"
+                                        (click)="gotoInstitutions(document.institute_name)">
+                                        <fa-icon [icon]="faUniversity" class="univi-icon"></fa-icon>
+                                        <span>{{document.institute_name}}</span>
+                                    </div>
+                                    <span (click)="openProfile(document.user_id)" class="post_by"><fa-icon
+                                [icon]="faUser"></fa-icon>by {{document.upload_by}}</span>
+                                </div>
+                                <div class="no_of_pages_academic_years">
+                                    <div class="academic_years">
+                                        <fa-icon [icon]="faCalendar"></fa-icon>
+                                        <span>{{document.academic_year}}</span>
+
+                                    </div>
+                                    
+
+                                    <div class="uploaded_by_container">
+                                        <span class="at">{{document.upload_date}}</span>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="documents_reviews_container">
+                                <div class="save_btn_container" (click)="toggleBookmark(document.file_key)">
+                                    <ng-container *ngIf="document.isBookmarked">
+                                        <!-- Show bookmarked icon -->
+                                        <img src="assets/icon/bookmark-solid.png" class="bookmark-icon">
+                                    </ng-container>
+                                    <ng-container *ngIf="!document.isBookmarked">
+                                        <!-- Show not bookmarked icon -->
+                                        <img src="assets/icon/bookmark-regular.png" class="bookmark-icon">
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="like_container" (click)="viewDocument(document.file_key)">
+                            
+                            <span class="like re">
+                                <fa-icon [icon]="faThumbsUp"></fa-icon>
+                                {{formatViewCount(document.like_count)}}
+                            </span>
+                            <span class="views re"><fa-icon [icon]="faEye"></fa-icon> {{formatViewCount(document.view_count)}}</span>
+                            <span class="downloads re"><fa-icon [icon]="faCloudDownload"></fa-icon>
+                                {{formatViewCount(document.download_count)}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<ng-container *ngIf="displayLogin">
+    <!-- <app-popup-login></app-popup-login> -->
+    <div *ngIf="displayLogin" class="overlay" (click)="closeLogin()"></div> <!-- Background overlay -->
+    <div *ngIf="displayLogin" class="login-container">
+        <span class="close-button" (click)="closeLogin()"> <fa-icon [icon]="faTimes"></fa-icon></span>
+        <h2>Login to continue</h2>
+        <span>Login to get best study materials</span>
+        <div class="buttons_container">
+            <div class="continue_with_email_container">
+                <button (click)="login()">Login</button>
+                <button (click)="register()">Register</button>
+            </div>
+            <button class="login_with_google_btn" (click)="loginWithGoogle()"><img src="assets/icon/google-icon.png"
+                    alt="" class="google_icon"> Continue with Google</button>
+        </div>
+        <div class="privacy-note-container">
+            <span>By continue, you agree to <span class="term-link" routerLink="/terms">Terms of Use</span> and <span
+                    class="term-link" routerLink="/privacy-policy">Privacy policy</span>.</span>
+        </div>
+    </div>
+</ng-container>

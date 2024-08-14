@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="course_container">
+        <div *ngIf="isCourse; else loadCourse">
+            <div class="skeleton-course_info_container">
+                <div class="skeleton-folder_icon"></div>
+                <div class="card-container-course_info">
+                    <div class="skeleton-card-text"></div>
+                    <div class="skeleton-card-desc"></div>
+                   
+                </div>
+            </div>
+        </div>
+
+        <ng-template #loadCourse>
+        <div class="course_info_container">
+            <fa-icon [icon]="faFolder" class="folder_icon"></fa-icon>
+            <div class="course_info">
+                <span class="course_name">{{courseName}}</span>
+                <div class="course_code_container">
+                    <span class="course_code">{{courseCode}}</span>
+                    <span class="no_of_documents"><fa-icon [icon]="faFileAlt"></fa-icon> {{fileCount}} Documents</span>
+                </div>
+            </div>
+        </div>
+        </ng-template>
+        <div class="follow_course_and_search_course_container">
+            <button class="follow_course_btnAnimation"  *ngIf="showFollowButtonAnimation; else loadFollowButton"></button>
+            <ng-template #loadFollowButton>
+            <button class="follow_course_btn"(click)="toggleFollow(courseName)">
+                <ng-container *ngIf="isFollowed">
+                    <fa-icon [icon]="faCheck"></fa-icon>
+                    <span>Course Followed</span>
+                </ng-container>
+                <ng-container *ngIf="!isFollowed">
+                    <fa-icon [icon]="faAdd"></fa-icon>
+                    <span>Follow this course</span>
+                </ng-container>
+                
+            </button>
+        </ng-template>
+            <!-- <div class="search_container">
+                <input type="text" placeholder="Search...">
+                <fa-icon [icon]="faSearch"></fa-icon>
+            </div> -->
+        </div>
+    </div>
+    <div class="wrapper">
+        <div *ngIf="isCoursePost; else loadCoursePost">
+            <div class="skeleton-container">
+                <div class="skeleton-card card-title"></div>
+                <div class="card-container">
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                    <div class="skeleton-card-specific_post"></div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #loadCoursePost>
+        <div class="popular_documents_wrapper_container">
+            <div class="popular_document_title_container">
+                <span class="popular_document_title">Recent documents</span>
+            </div>
+            <div class="popular_documents_wrapper">
+                <div class="popular_documents"  *ngFor=" let courseDocs of courseFilesDetails">
+                    <div class="popular_documents_image_container" (click)="viewDocument(courseDocs.file_key)">
+                        <img [src]="courseDocs.thumnail_url" alt="" class="popular_documents_thumbnails">
+                    </div>
+                    <div class="popular_documents_info">
+                        <span class="popular_documents_title" (click)="viewDocument(courseDocs.file_key)">{{courseDocs.file_title}}</span>
+                        <span class="popular_documents_course">{{courseDocs.file_type}}</span>
+                        <span class="popular_documents_course"><fa-icon [icon]="faFolder"></fa-icon> {{courseDocs.course_name}} | {{courseDocs.course_code}}</span>
+                        <span class="popular_documents_course" (click)="gotoInstitutions(courseDocs.institute_name);"> <fa-icon [icon]="faUniversity"></fa-icon> {{courseDocs.institute_name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </ng-template>
+    </div>
+    
+</div>
+
+
+
+<ng-container *ngIf="displayLogin">
+    <!-- <app-popup-login></app-popup-login> -->
+    <div *ngIf="displayLogin" class="overlay" (click)="closeLogin()"></div> <!-- Background overlay -->
+    <div *ngIf="displayLogin" class="login-container">
+        <span class="close-button" (click)="closeLogin()"> <fa-icon [icon]="faTimes"></fa-icon></span>
+        <h2>Login to continue</h2>
+        <span>Login to get best study materials</span>
+        <div class="buttons_container">
+            <div class="continue_with_email_container">
+                <button (click)="login()">Login</button>
+                <button (click)="register()">Register</button>
+            </div>
+            <button class="login_with_google_btn" (click)="loginWithGoogle()"><img src="assets/icon/google-icon.png"
+                    alt="" class="google_icon"> Continue with Google</button>
+        </div>
+        <div class="privacy-note-container">
+            <span>By continue, you agree to <span class="term-link" routerLink="/terms">Terms of Use</span> and <span
+                    class="term-link" routerLink="/privacy-policy">Privacy policy</span>.</span>
+        </div>
+    </div>
+</ng-container>

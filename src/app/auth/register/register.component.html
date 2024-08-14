@@ -1,0 +1,57 @@
+<app-simple-header></app-simple-header>
+<div class="container" *ngIf="isMailSent">
+  <div *ngIf="uploadingData" class="loading-container">
+    <mat-spinner diameter="30" color="primary"></mat-spinner>
+  </div>
+  <div class="form_container" >
+    <div class="title_container">
+      <span>Register</span>
+    </div>
+    <span class="title_Desc">Get best study materials from your institution.</span>
+    <form (ngSubmit)="submitForm()">
+      <input type="text" placeholder="Name" class="input-box" [(ngModel)]="userName" name="userName"
+        autocomplete="name">
+      <input type="email" placeholder="Email address" class="input-box" [(ngModel)]="userEmail" name="userEmail"
+        autocomplete="email">
+        <div class="password-input">
+          <input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Create new password" class="input-box" [(ngModel)]="userPassword" name="userPassword" autocomplete="new-password">
+          <fa-icon [icon]="showPassword ? faEyeSlash : faEye" (click)="toggleShowPassword('userPassword')" class="eye-icon"></fa-icon>
+        </div>
+        
+        <!-- Confirm password -->
+        <div class="password-input">
+          <input type="{{ showConfirmPassword ? 'text' : 'password' }}" placeholder="Confirm password" class="input-box" [(ngModel)]="confirmPassword" name="confirmPassword" autocomplete="new-password">
+          <fa-icon [icon]="showConfirmPassword ? faEyeSlash : faEye" (click)="toggleShowPassword('confirmPassword')" class="eye-icon"></fa-icon>
+        </div>
+      <div class="error_container">
+        <span class="err">{{errorMessage}}</span>
+        <!-- <span routerLink="/auth/forgot-password">Forgot password</span> -->
+      </div>
+      <input type="submit" value="Register" class="submitBTN">
+      <div class="dont_have_account_container">
+        <span>Already have an account? <span class="reg_text" routerLink="/auth/login">Login</span></span>
+      </div>
+    </form>
+    <div class="or_container">
+      <div class="line"></div>
+      <span class="or_text">OR</span>
+      <div class="line"></div>
+    </div>
+    <button class="google_login_container" (click)="googleLogin()">
+      <img src="assets/icon/google-icon.png" alt="" class="google_icon">
+      <span>Continue with Google</span>
+    </button>
+  </div>
+
+  <div class="privacy-note-container">
+    <span>By signing up, you agree to Tutdocs <span class="term-link" routerLink="/terms">Terms of Use</span> and <span
+        class="term-link" routerLink="/privacy-policy">Privacy policy</span>.</span>
+  </div>
+</div>
+<div class="show_mail_sent_message" *ngIf="showMailSentMessage">
+  <div class="_mail_container">
+    <h1>Verification email sent!</h1>
+    <p>A verification link has been sent to your email address. Please check your inbox and follow the instructions to verify your email.</p>
+    <a href="https://mail.google.com/" target="_blank" class="btn">Go to Inbox</a>
+  </div>
+</div>

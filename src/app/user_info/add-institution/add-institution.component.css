@@ -1,0 +1,106 @@
+.container {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background: white;
+    padding: 8px 0px;
+    border-radius: 10px;
+
+
+}
+
+.select-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Adjust the gap between select and other elements */
+
+}
+
+/* Style the select element */
+.select-container select {
+    /* Adjust width as needed */
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    width: 280px;
+    font-size: medium;
+    outline-color: #04ad42;
+    cursor: pointer;
+    /* appearance: none; Remove default arrow */
+}
+
+
+.select-placeholder {
+    color: #ccc !important;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+input {
+    padding: 12px 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline-color: #04ad42;
+    outline-width: 1px;
+    font-size: medium;
+    width: 250px;
+}
+
+.add-btn {
+    width: 100px;
+    border-radius: 10px;
+    padding: 8px 12px;
+    border: none;
+    background-image: linear-gradient(45deg, #04ad42, #3092FA);
+    color: white;
+    font-weight: 600;
+    font-size: medium;
+    margin-left: auto;
+
+    cursor: pointer;
+}
+
+.add-btn:hover {
+  opacity: .9;
+}
+
+.page-main-title h1 {
+    font-size: larger;
+    font-weight: 600;
+
+}
+
+.loading-container {
+    position: fixed;
+}
+
+.error-message {
+    font-size: small;
+    color: red;
+    padding: 2px;
+
+}
+
+.btn_msg-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}

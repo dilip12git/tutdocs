@@ -1,0 +1,34 @@
+
+<div class="container">
+<div class="wrapper-container">
+    <div *ngIf="isCoursesLoading; else loadCourses">
+        <div class="skeleton-container">
+            <div class="skeleton-card card-title"></div>
+            <div class="card-container">
+                <div class="skeleton-card-specific_post"></div>
+                <div class="skeleton-card-specific_post"></div>
+                <div class="skeleton-card-specific_post"></div>
+                <div class="skeleton-card-specific_post"></div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #loadCourses>
+        <div class="title">
+            <span>Popular Courses</span>
+        </div>
+        <div class="popular_course_container">
+            <div class="popular_post_card_content" *ngFor="let course of courseDetails">
+                <div class="course_icon_container">
+                    <fa-icon [icon]="faFolder" class="course-icon"></fa-icon>
+                </div>
+                <div class="popular_post_info_container" (click)="openCourse(course.course_name,course.course_code)">
+                    <span class="popular_post_course_name">{{course.course_name}}</span>
+                    <!-- <span class="popular_post_course_code"></span> -->
+                    <span class="popular_post_course_count">{{course.course_code}} | {{course.no_of_files}} Documents</span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
+</div>

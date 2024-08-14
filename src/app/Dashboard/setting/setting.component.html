@@ -1,0 +1,101 @@
+<div *ngIf="uploadingData" class="loading-container">
+    <mat-spinner diameter="30" color="primary"></mat-spinner>
+</div>
+<div class="container">
+  <!--  -->
+    <div class="cover_picture">
+    
+    </div>
+    <div class="profile_picture_container">
+        <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+        <img *ngIf="userData.profile_picture" [src]="userData.profile_picture" alt="" class="profile_picture">
+        <button (click)="changeProfile()" class="change_profile_button"><span class="change_profile_text">Change
+                Profile</span><fa-icon [icon]="faCamera"></fa-icon></button>
+    </div>
+    <div class="user_info_container">
+        <div class="user_info_title">
+            <span>Edit your profile details:</span>
+        </div>
+        <form (ngSubmit)="submitForm()">
+            <div class="form_input-wrapper">
+                <div class="input-box-container">
+                    <label for="">Name:</label>
+                    <input type="text" placeholder="Name" class="input-box" [(ngModel)]="userName" name="name">
+                </div>
+                <div class="input-box-container">
+                    <label for="">Email Address:</label>
+                    <input type="email" placeholder="Email address" class="input-box" [(ngModel)]="userEmail"
+                        name="email" disabled="true">
+                </div>
+                <div class="input-box-container">
+                    <label for="userId">User ID:</label>
+                    <input type="text" placeholder="User ID" class="input-box" [(ngModel)]="userId" name="userId"
+                        disabled="true">
+                </div>
+                <div class="input-box-container">
+                    <label for="">Your address:</label>
+                    <input type="text" class="input-box" placeholder="country/state/city" [(ngModel)]="address" name="address">
+                </div>
+
+                <div class="input-box-container">
+                    <label for="">Contact number:</label>
+                    <input type="tel" pattern="[0-9]{10}" class="input-box" placeholder="Contact number with country code" [(ngModel)]="contact" name="contact">
+                </div>
+               
+
+            </div>
+            <div class="form_input-wrapper">
+
+                <div class="input-box-container">
+                    <label for="">University / High School:</label>
+                    <input type="text" class="input-box" [(ngModel)]="userInstitute" name="study_at">
+                </div>
+                <div class="input-box-container">
+                    <label for="">Select Your Profession</label>
+                    <div class="radioOption_container">
+                        <label class="radio_option">
+                            <input type="radio" name="options" value="Student" [(ngModel)]="userType" class="radio_btn">
+                            <span class="option_name">Student</span>
+                        </label>
+                        <label class="radio_option">
+                            <input type="radio" name="options" value="Teacher" [(ngModel)]="userType" class="radio_btn">
+                            <span class="option_name">Teacher</span>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="input-box-container">
+                    <label for="">Branch of study:</label>
+                    <input type="text" class="input-box" placeholder="eg. B.Tech CSE" [(ngModel)]="branch" name="branch">
+                </div>
+
+                <div class="input-box-container">
+                    <label for="">Year of studying:</label>
+                    <!-- In your component file -->
+                        <select class="input-box" [(ngModel)]="studying_year" name="studying_year">
+                            <option value="1st year">1st year</option>
+                            <option value="2nd year">2nd year</option>
+                            <option value="3rd year">3rd year</option>
+                            <option value="4th year">4th year</option>
+                            <option value="Graduated">Graduated</option>
+                            <option value="Others">Others</option>
+                        </select>
+
+                </div>
+
+             
+                <div class="input-box-container">
+                    <label for="">Started On:</label>
+                    <input type="text" class="input-box" [(ngModel)]="started_on" name="started_on">
+                </div>
+                <div class="input-box-container">
+                    <div *ngIf="validationError" class="error-message">{{ validationError }}</div>
+                </div>
+                <input type="submit" value="Submit Details" class="submit_button">
+            </div>
+
+
+        </form>
+    </div>
+    <br><br>
+</div>

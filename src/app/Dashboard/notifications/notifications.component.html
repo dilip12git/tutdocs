@@ -1,0 +1,73 @@
+<div class="sekeleton_container" *ngIf="isLoading; else load">
+    <div class="skeleton_title"></div>
+    <div class="skeleton_wrapper" *ngFor="let item of repeatArray; let i = index">
+        <div class="skeleton_card_container">
+            <div class="skeleton_image_card"></div>
+            <div class="skeleton_info_card_container">
+                <div class="skeleton_text"></div>
+                <div class="skeleton_text longer"></div>
+                <div class="skeleton_text medium"></div>
+            </div>
+            <div class="skeleton_delete_icon">
+                <div class="skeleton_icon circle"></div>
+                <div class="skeleton_icon"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #load>
+    <div class="container">
+        <h3>Notifications <span class="notificationsCount" *ngIf="totalNotifications">( {{totalNotifications}} )</span>
+        </h3>
+        <div class="wr" *ngIf="shownotification; else loadNotFound">
+            <div class="notification_wrapper" *ngFor=" let notification of notifications">
+                <div class="notification">
+                    <div class="profile_container" *ngIf="notification.profile_picture"
+                        (click)="open(notification.url, notification.title,notification.id)">
+                        <img [src]="notification.profile_picture" alt="" class="profile_img">
+                    </div>
+                    <div class="notifications_info"
+                        (click)="open(notification.url, notification.title,notification.id)">
+                        <div class="notification_title_container">
+                            <span class="notification_title">{{notification.name}}</span>
+                            <span class="has_" *ngIf="notification.title==='New Post'">has posted</span>
+                            <span class="has_" *ngIf="notification.title==='New Follower'">has followed you</span>
+                            <span class="has_" *ngIf="notification.title==='liked'">liked to your post</span>
+                            <span class="file_name" *ngIf="notification.file_title">{{notification.file_title}}</span>
+                            <span class="file_name" *ngIf="notification.title==='New Follower'">Follow Back</span>
+                        </div>
+                        <span class="notification_message">{{notification.message}}</span>
+                        <span class="time_" [style.color]="notification.status === 'not_viewed' ? '#3092FA' : ''">{{
+                            getTimeElapsed(notification.time) }}</span>
+
+                    </div>
+                    <div class="delete_and_status_container">
+                        <span class="notification_status" *ngIf="notification.status==='not_viewed'"></span>
+                        <fa-icon [icon]="faEllipsisV" (click)="showOption(notification.id)"
+                            class="faEllipsisV"></fa-icon>
+                        <div class="remove_option_container" *ngIf="showRemoveOptionId === notification.id">
+                            <div class="option_item opt1" (click)="deleteNotification(notification.id,userId);">
+                                <fa-icon [icon]="faTrash"></fa-icon>
+                                <span class="remove_text">Remove</span>
+                            </div>
+                            <div class="option_item opt2" (click)="markAsRead(notification.id);">
+                                <fa-icon [icon]="faCheck"></fa-icon>
+                                <span class="read_txt">Mark as read</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <ng-template #loadNotFound>
+            <div class="notfoundMessage">
+                <span>No any notification found !</span>
+            </div>
+        </ng-template>
+    </div>
+
+</ng-template>
