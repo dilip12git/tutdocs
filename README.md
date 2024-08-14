@@ -4,26 +4,33 @@ You can explore top-rated course notes shared by peers and educators for an enri
 
 # Login
 You can easily login/register using your email and password or using google account
-![Screenshot (10)](https://github.com/user-attachments/assets/88923adb-1367-4f14-ae5d-ffc2212eaff1)
+![Screenshot (10)](https://github.com/user-attachments/assets/4f1b084a-4431-44c6-8dfd-c05933889eac)
+
 
 # Dashboard
-![Screenshot (2)](https://github.com/user-attachments/assets/cbd2c4bf-91e3-485a-a59d-58b852425497)
-![Screenshot (1)](https://github.com/user-attachments/assets/c49dd753-ad58-4e10-a899-f634624adde0)
+![Screenshot (2)](https://github.com/user-attachments/assets/dd742a75-361b-40f2-9000-11f745a95cf4)
+![Screenshot (1)](https://github.com/user-attachments/assets/a1b6b034-4859-4b01-af6d-cd92d2089540)
+
 
 # User Profile
-![Screenshot (4)](https://github.com/user-attachments/assets/db958c48-7d15-4876-b35b-6fb013c43629)
+![Screenshot (4)](https://github.com/user-attachments/assets/41f0edd8-5941-4d45-a88a-464cf48c2882)
 
 # File Upload
-![Screenshot (3)](https://github.com/user-attachments/assets/5140f771-2506-4b10-9b58-e1eac1da44b4)
+![Screenshot (3)](https://github.com/user-attachments/assets/51f478e4-cdda-4fa0-a79a-a64ff2b72e45)
+
 
 # Document Viewer
-![Screenshot (5)](https://github.com/user-attachments/assets/0dd66744-d3de-4d81-8b02-540621cebd17)
+![Screenshot (5)](https://github.com/user-attachments/assets/bcbd81e8-7cf8-411e-b572-428a36b74878)
+
+
 
 # Notification section
-![Screenshot (6)](https://github.com/user-attachments/assets/048e058e-6944-4585-a4a8-50e7335db253)
+![Screenshot (6)](https://github.com/user-attachments/assets/b91ca4f1-ff0c-494e-a3e5-f7da9e043dc1)
+
 
 # Mobile View
-![Screenshot (11)](https://github.com/user-attachments/assets/7a9fdd36-6f21-4216-aef2-9c7c7df5bce8)
+![Screenshot (11)](https://github.com/user-attachments/assets/4f19eb35-866b-412b-a311-22805aa0eb6c)
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
 
